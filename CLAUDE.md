@@ -51,6 +51,7 @@ src/js/pages/               home, gender, quiz, results, perfume, catalog, favor
 - **Favorites:** perfume ids in `state.favorites` (store.js `toggleFavorite`/`isFavorite`); hearts render via the shared `ui/perfumeCard.js`. Favorites page at #/favorites, heart icon in the header.
 - **Account is LOCAL-ONLY for now:** `state.user = { name, email, since }`, page at #/account (user icon in header). When the backend phase arrives, replace only the account page logic — the rest of the app reads `getState().user`.
 - **Gift links:** `#/gift?g=<url-safe base64 of {p,n,m}>` (perfume id, sender name, message) — same no-backend trick as shared results. Created from the detail page, rendered by pages/gift.js in the perfume's own palette.
+- **Surprise gift test (pages/giftTest.js):** sender builds `#/gtest?d=<{n,e,m}>` from #/gift-test (home hero button); opening it arms `state.giftMode` + resets progress; quiz then ends on #/gift-done (thank-you, NO results shown) which builds the sender-only result link (buildShareLink → existing shared-results view), offers mailto/copy, then wipes giftMode+answers so the recipient can't peek. FREE version — payment + automatic e-mail land with the backend phase.
 - Fonts: Vazirmatn (Persian) + Poppins (Latin). No login/signup in this phase. Mobile-friendly.
 
 ## Roadmap (future phases, keep code modular for these)

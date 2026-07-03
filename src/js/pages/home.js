@@ -17,6 +17,7 @@ export function renderHome(view) {
         <p class="hero-subtitle">${t("home.subtitle")}</p>
         <div class="hero-actions">
           <a class="btn btn-primary btn-lg" href="#/gender">${t("home.startTest")}</a>
+          <a class="btn btn-ghost btn-lg" href="#/gift-test">${t("home.giftTest")}</a>
         </div>
         <p class="hero-note">${t("home.note")}</p>
       </div>

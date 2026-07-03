@@ -22,6 +22,7 @@ import { renderPerfume } from "./pages/perfume.js";
 import { renderFavorites } from "./pages/favorites.js";
 import { renderAccount } from "./pages/account.js";
 import { renderGift } from "./pages/gift.js";
+import { renderGiftTestCreate, renderGiftTestLanding, renderGiftTestDone } from "./pages/giftTest.js";
 
 const NAV_LINKS = [
   { href: "#/", key: "nav.home" },
@@ -160,6 +161,9 @@ async function boot() {
   register("/favorites", page(renderFavorites, "general"));
   register("/account", page(renderAccount, "general"));
   register("/gift", page(renderGift, "self"));
+  register("/gift-test", page(renderGiftTestCreate, "general"));
+  register("/gtest", page(renderGiftTestLanding, "general"));
+  register("/gift-done", page(renderGiftTestDone, "gender"));
   register("/gender", page(renderGender, "gender"));
   register("/quiz", page(renderQuiz, "gender"));
   register("/results", page(renderResults, "gender"));

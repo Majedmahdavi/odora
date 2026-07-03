@@ -589,6 +589,15 @@ html[lang="en"] body { font-family: "Poppins", "Vazirmatn", system-ui, -apple-sy
 .gift-perfume { margin-top: 1.8rem; display: grid; justify-items: center; gap: 0.3rem; }
 .gift-art { color: var(--primary); margin-bottom: 0.6rem; }
 .gift-art svg { width: 110px; height: auto; }
+.icon-gift-lg { width: 64px !important; height: 64px !important; }
+.gift-create-form { max-width: 420px; margin-inline: auto; text-align: start; }
+.gift-create-form .btn { justify-self: stretch; }
+.gift-quote { margin-top: 1.6rem; font-style: italic; color: var(--primary); }
+.gift-site {
+  display: inline-block; margin-top: 1.9rem;
+  font-family: "Poppins", sans-serif; font-weight: 700; font-size: 1.3rem;
+  color: var(--primary);
+}
 .gift-desc { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.4rem; }
 .gift-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-top: 1.9rem; }
 

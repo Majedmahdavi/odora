@@ -15,6 +15,7 @@ const defaultState = {
   answers: {}, // quiz answers, filled in Step 3
   favorites: [], // hearted perfume ids
   user: null, // local account { name, email, since } — backend later
+  giftMode: null, // surprise gift test { n: sender name, e: sender email } — set by #/gtest
 };
 
 function load() {

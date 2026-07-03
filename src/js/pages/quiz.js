@@ -174,6 +174,8 @@ function goNext(view) {
   if (step < QUIZ.length - 1) {
     step++;
     paint(view);
+  } else if (getState().giftMode) {
+    navigate("/gift-done"); // surprise gift test: recipient never sees results
   } else {
     navigate("/results"); // matching happens in Step 5/6
   }
