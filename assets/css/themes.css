@@ -1,0 +1,84 @@
+/* =========================================================
+   Odora — Theme tokens
+   Two independent dimensions:
+     data-theme  → palette:  default | unisex | feminine | masculine
+     data-mode   → day/night: dark | light
+   Every palette has a dark AND a light variant.
+   General/nav pages (home, catalog, about, contact) use "default".
+   The test flow / gender content uses the chosen gender palette.
+   ========================================================= */
+
+/* ---------- DEFAULT / UNISEX — طلایی (general) ---------- */
+:root,
+:root[data-theme="default"][data-mode="dark"],
+:root[data-theme="unisex"][data-mode="dark"] {
+  color-scheme: dark;
+  --bg: #0b0b0e;  --bg-2: #111015;  --surface: #17161c;  --surface-2: #1f1e26;
+  --text: #f4efe4;  --text-muted: #a49d8f;  --text-faint: #6f695d;
+  --primary: #d4af37;  --primary-soft: #e9cf84;  --primary-deep: #a9822b;  --on-primary: #1a1608;
+  --border: rgba(212,175,55,0.20);  --border-soft: rgba(244,239,228,0.08);
+  --glow: rgba(212,175,55,0.30);  --shadow: rgba(0,0,0,0.55);
+  --grad-primary: linear-gradient(135deg,#e9cf84 0%,#d4af37 55%,#a9822b 100%);
+  --grad-hero: radial-gradient(1100px 620px at 78% -8%, rgba(212,175,55,0.16), transparent 60%),
+               radial-gradient(760px 520px at 8% 108%, rgba(212,175,55,0.08), transparent 60%);
+}
+:root[data-theme="default"][data-mode="light"],
+:root[data-theme="unisex"][data-mode="light"] {
+  color-scheme: light;
+  --bg: #f7f3ea;  --bg-2: #eee7d8;  --surface: #ffffff;  --surface-2: #f4ecdb;
+  --text: #24211a;  --text-muted: #6d6759;  --text-faint: #a69c88;
+  --primary: #a9801f;  --primary-soft: #d3b25a;  --primary-deep: #856419;  --on-primary: #ffffff;
+  --border: rgba(169,128,31,0.30);  --border-soft: rgba(36,33,26,0.10);
+  --glow: rgba(169,128,31,0.20);  --shadow: rgba(120,100,60,0.14);
+  --grad-primary: linear-gradient(135deg,#d9b95e 0%,#bb902e 55%,#8f6c1f 100%);
+  --grad-hero: radial-gradient(1100px 620px at 78% -8%, rgba(169,128,31,0.14), transparent 60%),
+               radial-gradient(760px 520px at 8% 108%, rgba(169,128,31,0.07), transparent 60%);
+}
+
+/* ---------- FEMININE — رزگلد ---------- */
+:root[data-theme="feminine"][data-mode="light"] {
+  color-scheme: light;
+  --bg: #fbf6f2;  --bg-2: #f5ece7;  --surface: #ffffff;  --surface-2: #fbf2ee;
+  --text: #3a2b2b;  --text-muted: #8a7472;  --text-faint: #b7a3a0;
+  --primary: #b76e79;  --primary-soft: #e8b7bd;  --primary-deep: #9c5460;  --on-primary: #ffffff;
+  --border: rgba(183,110,121,0.22);  --border-soft: rgba(58,43,43,0.08);
+  --glow: rgba(183,110,121,0.28);  --shadow: rgba(120,80,80,0.16);
+  --grad-primary: linear-gradient(135deg,#e8b7bd 0%,#b76e79 60%,#9c5460 100%);
+  --grad-hero: radial-gradient(1100px 620px at 78% -8%, rgba(183,110,121,0.16), transparent 60%),
+               radial-gradient(760px 520px at 8% 108%, rgba(183,110,121,0.10), transparent 60%);
+}
+:root[data-theme="feminine"][data-mode="dark"] {
+  color-scheme: dark;
+  --bg: #150f0e;  --bg-2: #1d1512;  --surface: #241a17;  --surface-2: #2f221d;
+  --text: #f7ede9;  --text-muted: #c6a7a0;  --text-faint: #8c716a;
+  --primary: #dd8b97;  --primary-soft: #f0bcc3;  --primary-deep: #b76e79;  --on-primary: #2a1518;
+  --border: rgba(221,139,151,0.24);  --border-soft: rgba(247,237,233,0.08);
+  --glow: rgba(221,139,151,0.28);  --shadow: rgba(0,0,0,0.5);
+  --grad-primary: linear-gradient(135deg,#f0bcc3 0%,#dd8b97 55%,#b76e79 100%);
+  --grad-hero: radial-gradient(1100px 620px at 78% -8%, rgba(221,139,151,0.16), transparent 60%),
+               radial-gradient(760px 520px at 8% 108%, rgba(221,139,151,0.09), transparent 60%);
+}
+
+/* ---------- MASCULINE — استیل/سرمه‌ای (مردانه‌تر) ---------- */
+:root[data-theme="masculine"][data-mode="dark"] {
+  color-scheme: dark;
+  --bg: #0a0d12;  --bg-2: #0f141b;  --surface: #141b24;  --surface-2: #1d2732;
+  --text: #eef2f6;  --text-muted: #98a4b2;  --text-faint: #5c6773;
+  --primary: #6188ad;  --primary-soft: #9fbdd9;  --primary-deep: #41648a;  --on-primary: #07101a;
+  --border: rgba(97,136,173,0.24);  --border-soft: rgba(238,242,246,0.08);
+  --glow: rgba(97,136,173,0.26);  --shadow: rgba(0,0,0,0.6);
+  --grad-primary: linear-gradient(135deg,#9fbdd9 0%,#6188ad 55%,#41648a 100%);
+  --grad-hero: radial-gradient(1100px 620px at 78% -8%, rgba(97,136,173,0.16), transparent 60%),
+               radial-gradient(760px 520px at 8% 108%, rgba(150,160,175,0.06), transparent 60%);
+}
+:root[data-theme="masculine"][data-mode="light"] {
+  color-scheme: light;
+  --bg: #eef1f5;  --bg-2: #e1e7ee;  --surface: #ffffff;  --surface-2: #eaf0f6;
+  --text: #17222e;  --text-muted: #566473;  --text-faint: #8b98a6;
+  --primary: #305d86;  --primary-soft: #6c93bc;  --primary-deep: #214563;  --on-primary: #ffffff;
+  --border: rgba(48,93,134,0.28);  --border-soft: rgba(23,34,46,0.10);
+  --glow: rgba(48,93,134,0.20);  --shadow: rgba(40,60,90,0.15);
+  --grad-primary: linear-gradient(135deg,#6c93bc 0%,#305d86 55%,#214563 100%);
+  --grad-hero: radial-gradient(1100px 620px at 78% -8%, rgba(48,93,134,0.14), transparent 60%),
+               radial-gradient(760px 520px at 8% 108%, rgba(48,93,134,0.07), transparent 60%);
+}

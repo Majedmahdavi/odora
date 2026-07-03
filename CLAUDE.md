@@ -1,0 +1,49 @@
+# Odora — رایحه‌ات رو با ما کشف کن
+
+Perfume recommendation web app: users answer scent-preference questions and get real-perfume suggestions with match percentages.
+
+## Working rules (important)
+
+- **The user communicates in Persian.** Reply in Persian.
+- **Step-by-step delivery:** build one step at a time, show the result with a short explanation, and WAIT for the user's approval before moving to the next step.
+- When the user requests changes, change ONLY what was asked — do not touch other parts.
+
+## Stack & run
+
+- Vanilla HTML/CSS/JS, ES Modules loaded natively — **no build step, no Node.js**.
+- Dev server: `python serve.py` (port 5500, sends `Cache-Control: no-store` so module edits show up). Configured in `.claude/launch.json` as `odora`.
+
+## Structure
+
+```
+index.html                  entry; <html data-theme="default" data-mode="dark">
+serve.py                    no-cache Python dev server
+assets/css/themes.css       4 palettes × 2 modes via [data-theme][data-mode]
+assets/css/styles.css       all component styles
+src/js/app.js               bootstrap: shell (header/footer), routes, per-route theme scope
+src/js/router.js            hash router (#/perfume/:id, query ?s=...)
+src/js/state/store.js       pub/sub store → localStorage key "odora:state"
+src/js/i18n/                loader + locales/fa.json (ALL UI text lives here)
+src/js/ui/                  theme.js (applyTheme/toggleMode), icons.js, toast.js
+src/js/data/                perfumes.js (100 real perfumes), families.js (7 scent families)
+src/js/quiz/questions.js    6-step quiz definition
+src/js/matching/            profile.js, localMatcher.js (cosine), aiMatcher.js (stub), index.js (facade)
+src/js/utils/               share.js (base64 result links), format.js (Persian digits)
+src/js/pages/               home, gender, quiz, results, perfume, catalog, about, contact
+```
+
+## Conventions
+
+- **i18n:** never hardcode UI text — add keys to `src/js/i18n/locales/fa.json`, read with `t("dotted.key")`. Layout is RTL; Latin names get class `latin` (`direction:ltr; unicode-bidi:isolate`).
+- **Theming:** palettes `default` (gold), `feminine` (rose-gold), `masculine` (navy/steel-blue), each with `dark` + `light` mode. Rules:
+  - General nav pages (home, catalog/گنجینه, about, contact) → always `default` palette.
+  - Test flow (gender, quiz, results) → the chosen gender's palette.
+  - Perfume detail → the palette of that perfume's own gender.
+  - Always change theme via `applyTheme()` / `toggleMode()` in `src/js/ui/theme.js` (route scoping is in `app.js` `page()`).
+- **Gender filtering is strict:** each section shows only its own gender's perfumes (`genderEligible` in localMatcher; tab filter in catalog).
+- **Matching:** strategy pattern — `matching/index.js` facade, `setMatcher("ai")` to swap the local cosine matcher for a future AI API.
+- Fonts: Vazirmatn (Persian) + Poppins (Latin). No login/signup in this phase. Mobile-friendly.
+
+## Roadmap (future phases, keep code modular for these)
+
+Payment gateway (incl. crypto), gift links, price comparison, user accounts, AI-based analysis, multi-language (i18n files are ready for it).
