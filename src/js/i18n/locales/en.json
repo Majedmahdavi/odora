@@ -13,7 +13,9 @@
     "catalog": "Collection",
     "menu": "Menu",
     "toggleMode": "Day / Night",
-    "toggleLang": "Change language"
+    "toggleLang": "Change language",
+    "favorites": "Favorites",
+    "account": "Account"
   },
   "home": {
     "eyebrow": "Scent discovery based on how you feel",
@@ -143,7 +145,13 @@
   "catalog": {
     "title": "Perfume Collection",
     "subtitle": "{count} famous perfumes in the Odora database",
-    "all": "All"
+    "all": "All",
+    "search": "Search name or brand…",
+    "noResults": "No perfume matches these filters.",
+    "filterSeason": "Season",
+    "filterFamily": "Scent family",
+    "filterStrength": "Strength",
+    "any": "Any"
   },
   "perfume": {
     "notesTitle": "Main Notes",
@@ -153,7 +161,42 @@
     "outOf5": "out of 5",
     "buy": "Buy",
     "buySoon": "Coming soon",
-    "back": "Back"
+    "back": "Back",
+    "similar": "Similar perfumes",
+    "fav": "Add to favorites",
+    "unfav": "Remove from favorites",
+    "gift": "Gift this perfume",
+    "giftName": "Your name (optional)",
+    "giftMessage": "Your message (optional)",
+    "giftCopy": "Copy gift link",
+    "giftCopied": "Gift link copied!"
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "empty": "You haven't hearted any perfume yet. Start from the Collection!",
+    "goCatalog": "Go to the Collection"
+  },
+  "account": {
+    "title": "Account",
+    "loginTitle": "Sign in / Sign up",
+    "name": "Name",
+    "email": "Email",
+    "submit": "Sign in",
+    "localNote": "For now your account is stored locally on this device; it will connect to a server in the backend phase.",
+    "welcome": "Hi, {name}!",
+    "memberSince": "Member since",
+    "favCount": "{count} perfumes in favorites",
+    "viewFavorites": "View favorites",
+    "lastResult": "View my last test result",
+    "noResult": "No test taken yet",
+    "logout": "Sign out"
+  },
+  "gift": {
+    "title": "A gift for you 🎁",
+    "someone": "A friend",
+    "lead": "{name} thinks this scent suits you:",
+    "view": "View the perfume",
+    "tryTest": "Take the test myself"
   },
   "common": {
     "comingSoon": "This section will be built in the next phase.",

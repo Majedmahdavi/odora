@@ -1,5 +1,5 @@
 import { buildProfile } from "./profile.js";
-import { localMatcher } from "./localMatcher.js";
+import { localMatcher, cosine } from "./localMatcher.js";
 import { aiMatcher } from "./aiMatcher.js";
 import { PERFUMES } from "../data/perfumes.js";
 
@@ -37,4 +37,15 @@ export async function recommend(state, { limit = 5, perfumes = PERFUMES } = {}) 
     top: results.slice(0, limit),
     all: results,
   };
+}
+
+/**
+ * Perfumes most similar to a given one (same gender, by note profile).
+ * Used by the "similar perfumes" strip on the detail page.
+ */
+export function similarTo(pf, limit = 4) {
+  return PERFUMES.filter((p) => p.id !== pf.id && p.gender === pf.gender)
+    .map((p) => ({ perfume: p, score: cosine(pf.families, p.families) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
 }

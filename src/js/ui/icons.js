@@ -21,6 +21,33 @@ export function moonIcon(className = "") {
   </svg>`;
 }
 
+/** Heart — outline normally, filled when favorited. */
+export function heartIcon(className = "", filled = false) {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="${filled ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 20.4S4.3 15.6 2.6 10.9C1.4 7.7 3.2 4.6 6.4 4.1c2-.3 3.9.6 5.6 2.6 1.7-2 3.6-2.9 5.6-2.6 3.2.5 5 3.6 3.8 6.8-1.7 4.7-9.4 9.5-9.4 9.5z"/>
+  </svg>`;
+}
+
+/** Person / account. */
+export function userIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="8" r="3.6"/>
+    <path d="M4.5 20c1.2-3.4 4-5.2 7.5-5.2s6.3 1.8 7.5 5.2"/>
+  </svg>`;
+}
+
+/** Gift box. */
+export function giftIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3.5" y="8" width="17" height="4"/>
+    <rect x="5.5" y="12" width="13" height="8.5"/>
+    <path d="M12 8v12.5M12 8c-2.2 0-4.6-.9-4.6-2.9C7.4 3.6 9 3 10 3.6c1.3.8 2 4.4 2 4.4zm0 0c2.2 0 4.6-.9 4.6-2.9C16.6 3.6 15 3 14 3.6c-1.3.8-2 4.4-2 4.4z"/>
+  </svg>`;
+}
+
 /** Minimal, elegant perfume bottle outline. */
 export function bottleIcon(className = "") {
   return `

@@ -4,7 +4,7 @@ Perfume recommendation web app: users answer scent-preference questions and get 
 
 ## Current status
 
-**v1 is COMPLETE and working** (8 phases + 2 revision rounds — full changelog in README.md).
+**v1 is COMPLETE and working** (8 phases + revisions + English + phase 9 features — full changelog in README.md).
 Do NOT rebuild anything from scratch; the site works. Only apply the specific changes the
 user asks for. Run it with `python serve.py` → http://localhost:5500 to see the current state.
 
@@ -30,12 +30,12 @@ src/js/app.js               bootstrap: shell (header/footer), routes, per-route 
 src/js/router.js            hash router (#/perfume/:id, query ?s=...)
 src/js/state/store.js       pub/sub store → localStorage key "odora:state"
 src/js/i18n/                loader + locales/fa.json + locales/en.json (ALL UI text lives here)
-src/js/ui/                  theme.js (applyTheme/toggleMode), icons.js, toast.js
+src/js/ui/                  theme.js (applyTheme/toggleMode), icons.js, toast.js, perfumeCard.js (shared card + heart)
 src/js/data/                perfumes.js (100 real perfumes, Persian desc), perfumesEn.js (English descs by id), families.js (7 scent families)
 src/js/quiz/questions.js    6-step quiz definition
 src/js/matching/            profile.js, localMatcher.js (cosine), aiMatcher.js (stub), index.js (facade)
 src/js/utils/               share.js (base64 result links), format.js (Persian digits)
-src/js/pages/               home, gender, quiz, results, perfume, catalog, about, contact
+src/js/pages/               home, gender, quiz, results, perfume, catalog, favorites, account, gift, about, contact
 ```
 
 ## Conventions
@@ -47,7 +47,10 @@ src/js/pages/               home, gender, quiz, results, perfume, catalog, about
   - Perfume detail → the palette of that perfume's own gender.
   - Always change theme via `applyTheme()` / `toggleMode()` in `src/js/ui/theme.js` (route scoping is in `app.js` `page()`).
 - **Gender filtering is strict:** each section shows only its own gender's perfumes (`genderEligible` in localMatcher; tab filter in catalog).
-- **Matching:** strategy pattern — `matching/index.js` facade, `setMatcher("ai")` to swap the local cosine matcher for a future AI API.
+- **Matching:** strategy pattern — `matching/index.js` facade, `setMatcher("ai")` to swap the local cosine matcher for a future AI API. `similarTo(pf)` powers the "similar perfumes" strip (same gender only).
+- **Favorites:** perfume ids in `state.favorites` (store.js `toggleFavorite`/`isFavorite`); hearts render via the shared `ui/perfumeCard.js`. Favorites page at #/favorites, heart icon in the header.
+- **Account is LOCAL-ONLY for now:** `state.user = { name, email, since }`, page at #/account (user icon in header). When the backend phase arrives, replace only the account page logic — the rest of the app reads `getState().user`.
+- **Gift links:** `#/gift?g=<url-safe base64 of {p,n,m}>` (perfume id, sender name, message) — same no-backend trick as shared results. Created from the detail page, rendered by pages/gift.js in the perfume's own palette.
 - Fonts: Vazirmatn (Persian) + Poppins (Latin). No login/signup in this phase. Mobile-friendly.
 
 ## Roadmap (future phases, keep code modular for these)

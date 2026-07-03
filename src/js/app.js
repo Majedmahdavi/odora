@@ -9,7 +9,7 @@ import { loadLocale, t, getLang } from "./i18n/index.js";
 import { getState, setState } from "./state/store.js";
 import { register, setNotFound, startRouter, resolve } from "./router.js";
 import { applyTheme, getMode, toggleMode } from "./ui/theme.js";
-import { sunIcon, moonIcon } from "./ui/icons.js";
+import { sunIcon, moonIcon, heartIcon, userIcon } from "./ui/icons.js";
 
 import { renderHome } from "./pages/home.js";
 import { renderAbout } from "./pages/about.js";
@@ -19,6 +19,9 @@ import { renderQuiz } from "./pages/quiz.js";
 import { renderResults } from "./pages/results.js";
 import { renderCatalog } from "./pages/catalog.js";
 import { renderPerfume } from "./pages/perfume.js";
+import { renderFavorites } from "./pages/favorites.js";
+import { renderAccount } from "./pages/account.js";
+import { renderGift } from "./pages/gift.js";
 
 const NAV_LINKS = [
   { href: "#/", key: "nav.home" },
@@ -50,6 +53,8 @@ function headerHtml() {
         </a>
         <nav class="main-nav" id="mainNav" aria-label="${t("nav.menu")}">${links}</nav>
         <div class="header-actions">
+          <a class="mode-toggle" href="#/favorites" data-nav aria-label="${t("nav.favorites")}">${heartIcon("icon-mode")}</a>
+          <a class="mode-toggle" href="#/account" data-nav aria-label="${t("nav.account")}">${userIcon("icon-mode")}</a>
           <button class="lang-toggle" id="langToggle" type="button" aria-label="${t("nav.toggleLang")}">${langToggleLabel()}</button>
           <button class="mode-toggle" id="modeToggle" type="button" aria-label="${t("nav.toggleMode")}">${modeToggleIcon()}</button>
           <button class="nav-toggle" id="navToggle" aria-label="${t("nav.menu")}" aria-expanded="false">
@@ -152,6 +157,9 @@ async function boot() {
   register("/about", page(renderAbout, "general"));
   register("/contact", page(renderContact, "general"));
   register("/catalog", page(renderCatalog, "general"));
+  register("/favorites", page(renderFavorites, "general"));
+  register("/account", page(renderAccount, "general"));
+  register("/gift", page(renderGift, "self"));
   register("/gender", page(renderGender, "gender"));
   register("/quiz", page(renderQuiz, "gender"));
   register("/results", page(renderResults, "gender"));

@@ -13,6 +13,8 @@ const defaultState = {
   mode: "dark", // day/night: dark | light (global user choice)
   gender: null, // feminine | masculine | unisex
   answers: {}, // quiz answers, filled in Step 3
+  favorites: [], // hearted perfume ids
+  user: null, // local account { name, email, since } — backend later
 };
 
 function load() {
@@ -50,4 +52,16 @@ export function subscribe(fn) {
 /** Clear a test run (used by "test again" later). Keeps mode/lang. */
 export function resetProgress() {
   return setState({ gender: null, answers: {} });
+}
+
+/* --- favorites ---------------------------------------------------------- */
+export function isFavorite(id) {
+  return state.favorites.includes(id);
+}
+
+export function toggleFavorite(id) {
+  const favorites = isFavorite(id)
+    ? state.favorites.filter((f) => f !== id)
+    : [...state.favorites, id];
+  return setState({ favorites });
 }

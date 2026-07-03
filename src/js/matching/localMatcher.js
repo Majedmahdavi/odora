@@ -8,7 +8,7 @@ import { FAMILIES } from "../data/families.js";
  */
 
 /** Cosine similarity between two family vectors → 0..1. */
-function cosine(a, b) {
+export function cosine(a, b) {
   let dot = 0;
   let na = 0;
   let nb = 0;
