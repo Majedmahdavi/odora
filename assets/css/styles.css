@@ -620,6 +620,20 @@ html[lang="en"] body { font-family: "Poppins", "Vazirmatn", system-ui, -apple-sy
 .pd-similar { margin-top: 2.2rem; }
 .pd-similar h2 { font-size: 1.3rem; }
 
+/* ---------- Fragrance structure (olfactory pyramid) ---------- */
+.tier-list { display: grid; gap: 1rem; }
+.tier-row { display: grid; grid-template-columns: 120px 1fr; gap: 1rem; align-items: start; }
+.tier-label { font-weight: 600; color: var(--text-muted); font-size: 0.9rem; padding-top: 0.3rem; }
+.tier-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.note-chip {
+  padding: 0.32rem 0.85rem; border-radius: 999px; font-size: 0.86rem;
+  background: var(--bg-2); border: 1px solid var(--border-soft); color: var(--text);
+}
+@media (max-width: 640px) {
+  .tier-row { grid-template-columns: 1fr; gap: 0.4rem; }
+  .tier-label { padding-top: 0; }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 420px) {
   .header-actions { gap: 0.3rem; }

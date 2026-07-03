@@ -17,7 +17,10 @@
       "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" api user --jq .login)",
       "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" repo create odora --public --source . --push --description \"Odora - perfume recommendation web app | Discover your scent\")",
       "PowerShell($gh = \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\"; for \\($i = 0; $i -lt 12; $i++\\) { $s = \\(& $gh api repos/Majedmahdavi/odora/pages --jq .status\\); \"attempt $\\($i+1\\): $s\"; if \\($s -eq \"built\"\\) { break }; Start-Sleep -Seconds 10 })",
-      "PowerShell($r = Invoke-WebRequest -Uri \"https://majedmahdavi.github.io/odora/\" -UseBasicParsing; \"status: $\\($r.StatusCode\\)\"; \"title found: $\\($r.Content -match 'Odora'\\)\"; $r2 = Invoke-WebRequest -Uri \"https://majedmahdavi.github.io/odora/src/js/app.js\" -UseBasicParsing; \"app.js: $\\($r2.StatusCode\\)\"; $r3 = Invoke-WebRequest -Uri \"https://majedmahdavi.github.io/odora/src/js/i18n/locales/fa.json\" -UseBasicParsing; \"fa.json: $\\($r3.StatusCode\\)\")"
+      "PowerShell($r = Invoke-WebRequest -Uri \"https://majedmahdavi.github.io/odora/\" -UseBasicParsing; \"status: $\\($r.StatusCode\\)\"; \"title found: $\\($r.Content -match 'Odora'\\)\"; $r2 = Invoke-WebRequest -Uri \"https://majedmahdavi.github.io/odora/src/js/app.js\" -UseBasicParsing; \"app.js: $\\($r2.StatusCode\\)\"; $r3 = Invoke-WebRequest -Uri \"https://majedmahdavi.github.io/odora/src/js/i18n/locales/fa.json\" -UseBasicParsing; \"fa.json: $\\($r3.StatusCode\\)\")",
+      "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth setup-git)",
+      "PowerShell(git push 2>&1)",
+      "PowerShell(git fetch origin; git status -sb; \"---\"; \"local commit:  $\\(git rev-parse HEAD\\)\"; \"github commit: $\\(git rev-parse origin/master\\)\"; \"---\"; \"files in github copy: $\\(\\(git ls-tree -r origin/master --name-only\\).Count\\)\"; \"files in local copy:  $\\(\\(git ls-tree -r HEAD --name-only\\).Count\\)\")"
     ]
   }
 }

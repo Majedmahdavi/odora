@@ -47,6 +47,7 @@ src/js/pages/               home, gender, quiz, results, perfume, catalog, favor
   - Perfume detail → the palette of that perfume's own gender.
   - Always change theme via `applyTheme()` / `toggleMode()` in `src/js/ui/theme.js` (route scoping is in `app.js` `page()`).
 - **Gender filtering is strict:** each section shows only its own gender's perfumes (`genderEligible` in localMatcher; tab filter in catalog).
+- **Olfactory pyramid:** each perfume record has `notes: { top[], heart[], base[] }` holding note SLUGS (e.g. "bergamot"); display names live in the `notes` section of BOTH fa.json and en.json (add new slugs to both). Rendered on the detail page (pd-structure); empty tiers are skipped.
 - **Matching:** strategy pattern — `matching/index.js` facade, `setMatcher("ai")` to swap the local cosine matcher for a future AI API. `similarTo(pf)` powers the "similar perfumes" strip (same gender only).
 - **Favorites:** perfume ids in `state.favorites` (store.js `toggleFavorite`/`isFavorite`); hearts render via the shared `ui/perfumeCard.js`. Favorites page at #/favorites, heart icon in the header.
 - **Account is LOCAL-ONLY for now:** `state.user = { name, email, since }`, page at #/account (user icon in header). When the backend phase arrives, replace only the account page logic — the rest of the app reads `getState().user`.

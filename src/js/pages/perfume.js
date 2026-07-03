@@ -35,6 +35,24 @@ export function renderPerfume(view, params) {
     .filter((n) => n.score > 0)
     .sort((a, b) => b.score - a.score);
 
+  // olfactory pyramid — the perfume's actual ingredients (localized slugs)
+  const TIERS = [
+    ["top", "perfume.topNotes"],
+    ["heart", "perfume.heartNotes"],
+    ["base", "perfume.baseNotes"],
+  ];
+  const structureRows = TIERS.filter(([tier]) => pf.notes?.[tier]?.length)
+    .map(
+      ([tier, key]) => `
+      <div class="tier-row">
+        <span class="tier-label">${t(key)}</span>
+        <span class="tier-chips">
+          ${pf.notes[tier].map((n) => `<span class="note-chip">${t(`notes.${n}`, n)}</span>`).join("")}
+        </span>
+      </div>`
+    )
+    .join("");
+
   view.innerHTML = `
     <section class="container perfume-detail">
       <button class="pd-back" id="pdBack" type="button">‹ ${t("perfume.back")}</button>
@@ -79,6 +97,12 @@ export function renderPerfume(view, params) {
           </form>
         </div>
       </div>
+
+      ${structureRows ? `
+      <div class="pd-notes pd-structure">
+        <h2>${t("perfume.structure")}</h2>
+        <div class="tier-list">${structureRows}</div>
+      </div>` : ""}
 
       <div class="pd-notes">
         <h2>${t("perfume.notesTitle")}</h2>
