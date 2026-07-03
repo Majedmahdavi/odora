@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap: add the absolute URL once the domain is known, e.g.
+# Sitemap: https://odora.example/sitemap.xml
