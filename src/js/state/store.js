@@ -15,7 +15,8 @@ const defaultState = {
   answers: {}, // quiz answers, filled in Step 3
   favorites: [], // hearted perfume ids
   user: null, // local account { name, email, since } — backend later
-  giftMode: null, // surprise gift test { n: sender name, e: sender email } — set by #/gtest
+  giftMode: null, // surprise gift test { id, n: sender name } — set by #/gtest
+  myGifts: [], // gift links I created: { id, secret, createdAt } (server holds the rest)
 };
 
 function load() {
@@ -53,6 +54,11 @@ export function subscribe(fn) {
 /** Clear a test run (used by "test again" later). Keeps mode/lang. */
 export function resetProgress() {
   return setState({ gender: null, answers: {} });
+}
+
+/** Remember a gift link I created (id + secret prove ownership to the API). */
+export function addMyGift(gift) {
+  return setState({ myGifts: [...state.myGifts, gift] });
 }
 
 /* --- favorites ---------------------------------------------------------- */

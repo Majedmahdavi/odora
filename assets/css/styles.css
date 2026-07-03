@@ -616,6 +616,23 @@ html[lang="en"] body { font-family: "Poppins", "Vazirmatn", system-ui, -apple-sy
 .btn.is-disabled { opacity: 0.5; pointer-events: none; }
 .account-logout { margin-top: 1.6rem; color: var(--text-muted); }
 
+.gift-history {
+  margin-top: 2.2rem; text-align: start;
+  background: var(--surface); border: 1px solid var(--border-soft);
+  border-radius: 18px; padding: 1.4rem;
+}
+.gift-history h2 { font-size: 1.15rem; margin-bottom: 1rem; text-align: center; }
+.gift-history > .btn { margin-top: 1.1rem; width: 100%; }
+.gift-row {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.9rem;
+  padding: 0.65rem 0.2rem; border-bottom: 1px solid var(--border-soft);
+}
+.gift-row:last-child { border-bottom: none; }
+.gift-row-date { color: var(--text-muted); font-size: 0.88rem; white-space: nowrap; }
+.gift-row-status { font-size: 0.9rem; color: var(--text-muted); }
+.gift-row-status.is-done { color: var(--primary); font-weight: 600; }
+.gift-row-view.btn { padding: 0.45rem 1rem; font-size: 0.88rem; }
+
 /* ---------- Similar perfumes ---------- */
 .pd-similar { margin-top: 2.2rem; }
 .pd-similar h2 { font-size: 1.3rem; }

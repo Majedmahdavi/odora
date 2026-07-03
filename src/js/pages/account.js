@@ -79,6 +79,12 @@ function profile(view, user) {
         }
       </div>
 
+      <div class="gift-history">
+        <h2>${t("giftTest.historyTitle")} 🎁</h2>
+        <div id="giftHistory"><p class="muted">${t("results.loading")}</p></div>
+        <a class="btn btn-ghost" href="#/gift-test">${t("giftTest.historyCreate")}</a>
+      </div>
+
       <p class="muted account-note">${t("account.localNote")}</p>
       <button class="btn btn-ghost account-logout" id="logoutBtn" type="button">${t("account.logout")}</button>
     </section>
@@ -88,4 +94,48 @@ function profile(view, user) {
     setState({ user: null }); // favorites stay on the device
     renderAccount(view);
   });
+
+  paintGiftHistory(view.querySelector("#giftHistory"));
+}
+
+/* --- gift-test history (server-backed) ----------------------------------- */
+async function paintGiftHistory(box) {
+  const mine = getState().myGifts || [];
+  if (!mine.length) {
+    box.innerHTML = `<p class="muted">${t("giftTest.historyEmpty")}</p>`;
+    return;
+  }
+  try {
+    const res = await fetch("/api/gifts/mine", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: mine.map(({ id, secret }) => ({ id, secret })) }),
+    });
+    if (!res.ok) throw new Error("bad-status");
+    const { gifts } = await res.json();
+    if (!gifts.length) {
+      box.innerHTML = `<p class="muted">${t("giftTest.historyEmpty")}</p>`;
+      return;
+    }
+    const locale = getLang() === "fa" ? "fa-IR" : "en-US";
+    box.innerHTML = gifts
+      .sort((a, b) => b.createdAt - a.createdAt)
+      .map((g) => {
+        const date = new Date(g.createdAt * 1000).toLocaleDateString(locale);
+        const done = g.usedAt != null;
+        return `
+          <div class="gift-row">
+            <span class="gift-row-date">${date}</span>
+            <span class="gift-row-status ${done ? "is-done" : ""}">
+              ${done ? t("giftTest.historyDone") : t("giftTest.historyPending")}
+            </span>
+            ${done
+              ? `<a class="btn btn-primary gift-row-view" href="${g.resultLink}">${t("giftTest.historyView")}</a>`
+              : `<span class="muted gift-row-view">—</span>`}
+          </div>`;
+      })
+      .join("");
+  } catch {
+    box.innerHTML = `<p class="muted">${t("giftTest.historyOffline")}</p>`;
+  }
 }
