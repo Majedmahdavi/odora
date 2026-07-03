@@ -17,7 +17,14 @@ user asks for. Run it with `python serve.py` → http://localhost:5500 to see th
 ## Stack & run
 
 - Vanilla HTML/CSS/JS, ES Modules loaded natively — **no build step, no Node.js**.
-- Dev server: `python serve.py` (port 5500, sends `Cache-Control: no-store` so module edits show up). Configured in `.claude/launch.json` as `odora`.
+- Dev server: `python serve.py` (port 5500, sends `Cache-Control: no-store` so module edits show up; also proxies `/api/*` to the production API so server-backed features work locally). Configured in `.claude/launch.json` as `odora`.
+
+## Production / backend
+
+- **Live site:** http://84.32.10.66/ (own VPS, Ubuntu 22.04, nginx serving `/var/www/odora`) + mirror on GitHub Pages (majedmahdavi.github.io/odora — no API there).
+- **Deploy frontend:** `git push`, then `git pull` in `/var/www/odora` on the VPS.
+- **Gift API:** stdlib-Python + sqlite at `/opt/odora-api/api.py` (systemd unit `odora-api`), behind nginx `location /api/`. Endpoints: POST `/api/gifts`, GET `/api/gifts/:id`, POST `/api/gifts/:id/result` (single-use, 409 after), POST `/api/gifts/mine` (secret-checked history). SMTP email hook reads `/opt/odora-api/config.json` — inactive until configured.
+- SSH/connection details live in the private session memory, NOT here (public repo).
 
 ## Structure
 
@@ -52,7 +59,7 @@ src/js/pages/               home, gender, quiz, results, perfume, catalog, favor
 - **Favorites:** perfume ids in `state.favorites` (store.js `toggleFavorite`/`isFavorite`); hearts render via the shared `ui/perfumeCard.js`. Favorites page at #/favorites, heart icon in the header.
 - **Account is LOCAL-ONLY for now:** `state.user = { name, email, since }`, page at #/account (user icon in header). When the backend phase arrives, replace only the account page logic — the rest of the app reads `getState().user`.
 - **Gift links:** `#/gift?g=<url-safe base64 of {p,n,m}>` (perfume id, sender name, message) — same no-backend trick as shared results. Created from the detail page, rendered by pages/gift.js in the perfume's own palette.
-- **Surprise gift test (pages/giftTest.js):** sender builds `#/gtest?d=<{n,e,m}>` from #/gift-test (home hero button); opening it arms `state.giftMode` + resets progress; quiz then ends on #/gift-done (thank-you, NO results shown) which builds the sender-only result link (buildShareLink → existing shared-results view), offers mailto/copy, then wipes giftMode+answers so the recipient can't peek. FREE version — payment + automatic e-mail land with the backend phase.
+- **Surprise gift test (pages/giftTest.js) is SERVER-BACKED:** creating a link REQUIRES `state.user` (account). POST /api/gifts → `{id, secret}`; secret is stored in `state.myGifts`, the recipient link is `#/gtest?g=<id>` (no data in the URL). Landing GETs the gift (used → "already used" page), arms `state.giftMode={id,n}`; quiz ends on #/gift-done which POSTs the result to the server (single-use burn) and shows a thank-you with ZERO result access, then wipes giftMode+answers. The sender reads results in the account panel ("gift history" section, `/api/gifts/mine`). Payment + e-mail activation are future steps.
 - Fonts: Vazirmatn (Persian) + Poppins (Latin). No login/signup in this phase. Mobile-friendly.
 
 ## Roadmap (future phases, keep code modular for these)
