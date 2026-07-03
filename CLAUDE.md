@@ -2,6 +2,12 @@
 
 Perfume recommendation web app: users answer scent-preference questions and get real-perfume suggestions with match percentages.
 
+## Current status
+
+**v1 is COMPLETE and working** (8 phases + 2 revision rounds — full changelog in README.md).
+Do NOT rebuild anything from scratch; the site works. Only apply the specific changes the
+user asks for. Run it with `python serve.py` → http://localhost:5500 to see the current state.
+
 ## Working rules (important)
 
 - **The user communicates in Persian.** Reply in Persian.
