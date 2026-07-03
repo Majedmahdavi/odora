@@ -9,7 +9,15 @@
       "PowerShell(git add assets/css/themes.css)",
       "PowerShell(git archive --format=zip -o \"$env:USERPROFILE\\\\Desktop\\\\Odora-backup.zip\" HEAD; if \\($?\\) { \"backup updated: \" + \\(Get-Item \"$env:USERPROFILE\\\\Desktop\\\\Odora-backup.zip\"\\).LastWriteTime })",
       "PowerShell($dest = Join-Path \\([Environment]::GetFolderPath\\('Desktop'\\)\\) \\('Odora-backup-' + \\(Get-Date -Format 'yyyy-MM-dd_HH-mm'\\) + '.zip'\\); Compress-Archive -Path \\(Get-ChildItem -Force | Where-Object Name -ne '.git'\\).FullName -DestinationPath $dest -Force; 'Backup created: ' + $dest + ' \\(' + [math]::Round\\(\\(Get-Item $dest\\).Length/1KB\\) + ' KB\\)')",
-      "PowerShell(git add CLAUDE.md)"
+      "PowerShell(git add CLAUDE.md)",
+      "PowerShell(winget install --id GitHub.cli --accept-source-agreements --accept-package-agreements --silent)",
+      "PowerShell(winget install --id GitHub.cli --source winget --accept-source-agreements --accept-package-agreements --silent)",
+      "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth login --hostname github.com --git-protocol https --web)",
+      "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth status)",
+      "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" api user --jq .login)",
+      "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" repo create odora --public --source . --push --description \"Odora - perfume recommendation web app | Discover your scent\")",
+      "PowerShell($gh = \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\"; for \\($i = 0; $i -lt 12; $i++\\) { $s = \\(& $gh api repos/Majedmahdavi/odora/pages --jq .status\\); \"attempt $\\($i+1\\): $s\"; if \\($s -eq \"built\"\\) { break }; Start-Sleep -Seconds 10 })",
+      "PowerShell($r = Invoke-WebRequest -Uri \"https://majedmahdavi.github.io/odora/\" -UseBasicParsing; \"status: $\\($r.StatusCode\\)\"; \"title found: $\\($r.Content -match 'Odora'\\)\"; $r2 = Invoke-WebRequest -Uri \"https://majedmahdavi.github.io/odora/src/js/app.js\" -UseBasicParsing; \"app.js: $\\($r2.StatusCode\\)\"; $r3 = Invoke-WebRequest -Uri \"https://majedmahdavi.github.io/odora/src/js/i18n/locales/fa.json\" -UseBasicParsing; \"fa.json: $\\($r3.StatusCode\\)\")"
     ]
   }
 }
