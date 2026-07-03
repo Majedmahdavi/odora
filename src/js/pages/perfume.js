@@ -1,5 +1,6 @@
-import { t } from "../i18n/index.js";
+import { t, getLang } from "../i18n/index.js";
 import { getPerfumeById } from "../data/perfumes.js";
+import { DESC_EN } from "../data/perfumesEn.js";
 import { FAMILIES } from "../data/families.js";
 import { bottleIcon } from "../ui/icons.js";
 import { toFaDigits } from "../utils/format.js";
@@ -20,7 +21,8 @@ export function renderPerfume(view, params) {
 
   const occasion = pf.occasion
     .map((o) => t(`quiz.questions.occasion.options.${o}`))
-    .join("، ");
+    .join(getLang() === "fa" ? "، " : ", ");
+  const desc = getLang() === "fa" ? pf.desc : DESC_EN[pf.id] ?? pf.desc;
   const season = t(`quiz.questions.season.options.${pf.season}`);
   const strength = t(`quiz.questions.strength.options.${pf.strength}`);
 
@@ -39,7 +41,7 @@ export function renderPerfume(view, params) {
           <span class="badge badge-${pf.gender}">${t(`gender.options.${pf.gender}.label`)}</span>
           <h1 class="pd-name latin">${pf.name}</h1>
           <p class="pd-brand latin">${pf.brand}</p>
-          <p class="pd-desc">${pf.desc}</p>
+          <p class="pd-desc">${desc}</p>
 
           <div class="pd-meta">
             <span class="meta-chip"><b>${t("perfume.season")}:</b> ${season}</span>

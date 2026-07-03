@@ -29,9 +29,9 @@ assets/css/styles.css       all component styles
 src/js/app.js               bootstrap: shell (header/footer), routes, per-route theme scope
 src/js/router.js            hash router (#/perfume/:id, query ?s=...)
 src/js/state/store.js       pub/sub store → localStorage key "odora:state"
-src/js/i18n/                loader + locales/fa.json (ALL UI text lives here)
+src/js/i18n/                loader + locales/fa.json + locales/en.json (ALL UI text lives here)
 src/js/ui/                  theme.js (applyTheme/toggleMode), icons.js, toast.js
-src/js/data/                perfumes.js (100 real perfumes), families.js (7 scent families)
+src/js/data/                perfumes.js (100 real perfumes, Persian desc), perfumesEn.js (English descs by id), families.js (7 scent families)
 src/js/quiz/questions.js    6-step quiz definition
 src/js/matching/            profile.js, localMatcher.js (cosine), aiMatcher.js (stub), index.js (facade)
 src/js/utils/               share.js (base64 result links), format.js (Persian digits)
@@ -40,7 +40,7 @@ src/js/pages/               home, gender, quiz, results, perfume, catalog, about
 
 ## Conventions
 
-- **i18n:** never hardcode UI text — add keys to `src/js/i18n/locales/fa.json`, read with `t("dotted.key")`. Layout is RTL; Latin names get class `latin` (`direction:ltr; unicode-bidi:isolate`).
+- **i18n:** never hardcode UI text — add keys to BOTH `locales/fa.json` and `locales/en.json` (same structure), read with `t("dotted.key")`. The header has a language toggle (EN/فا); switching reloads the locale, flips `dir`/`lang` on `<html>` and re-renders in place (no page reload). `toFaDigits()` is locale-aware (Persian digits only when lang=fa). Perfume descriptions: Persian on the record in perfumes.js, English in perfumesEn.js keyed by id. Latin names get class `latin`.
 - **Theming:** palettes `default` (gold), `feminine` (rose-gold), `masculine` (navy/steel-blue), each with `dark` + `light` mode. Rules:
   - General nav pages (home, catalog/گنجینه, about, contact) → always `default` palette.
   - Test flow (gender, quiz, results) → the chosen gender's palette.

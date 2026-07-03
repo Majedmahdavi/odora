@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "title": "Odora — Discover Your Scent"
+  },
+  "brand": {
+    "name": "Odora",
+    "slogan": "Discover your scent with us"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact",
+    "catalog": "Collection",
+    "menu": "Menu",
+    "toggleMode": "Day / Night",
+    "toggleLang": "Change language"
+  },
+  "home": {
+    "eyebrow": "Scent discovery based on how you feel",
+    "titleLead": "A fragrance that is truly",
+    "titleAccent": "“you”",
+    "subtitle": "Answer a few simple questions about your mood and taste, and we'll suggest perfumes you'll probably fall in love with — no more drowning in hundreds of options.",
+    "startTest": "Start the Test",
+    "note": "Under two minutes • No sign-up",
+    "howTitle": "How does it work?",
+    "howSubtitle": "Three simple steps to your scent",
+    "steps": [
+      {
+        "title": "Answer a few questions",
+        "text": "Sensory and practical questions about spaces, moments and your taste."
+      },
+      {
+        "title": "Your taste gets analyzed",
+        "text": "Your answers are turned into a numeric profile of scent families."
+      },
+      {
+        "title": "Get your perfumes",
+        "text": "The five best-matching perfumes, each with a match percentage."
+      }
+    ]
+  },
+  "about": {
+    "title": "About Us",
+    "lead": "Odora discovers your scent with you.",
+    "p1": "Choosing a perfume among hundreds of options is overwhelming. We made it simple: with a few short questions about your mood and taste, we turn your scent preferences into a numeric profile and suggest the closest matches from dozens of famous perfumes.",
+    "p2": "No ads and no sales bias — just a real match between your taste and each perfume's character.",
+    "values": [
+      { "title": "Personalized", "text": "Suggestions are built from your own answers, not from bestseller lists." },
+      { "title": "Transparent", "text": "For every perfume you see how close it is to your taste — and why." },
+      { "title": "Simple & fast", "text": "Under two minutes, no sign-up." }
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "lead": "Questions, suggestions or partnership? We'd love to hear from you.",
+    "emailLabel": "Email",
+    "email": "hello@odora.example",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send Message",
+      "success": "Message received! (demo version)"
+    }
+  },
+  "gender": {
+    "title": "What style are you looking for?",
+    "subtitle": "Your choice also tunes the site's colors to match your taste.",
+    "options": {
+      "feminine": { "label": "Feminine", "desc": "Soft, floral, feminine scents" },
+      "masculine": { "label": "Masculine", "desc": "Warm, woody, masculine scents" },
+      "unisex": { "label": "Unisex", "desc": "For everyone, regardless of gender" }
+    },
+    "continue": "Continue to the Test",
+    "changeHint": "You can change your choice anytime"
+  },
+  "quiz": {
+    "title": "Scent Test",
+    "progress": "Question {current} of {total}",
+    "next": "Next",
+    "back": "Back",
+    "finish": "See Results",
+    "questions": {
+      "space": {
+        "title": "Which space calms you down?",
+        "options": {
+          "forest": "A rainy forest",
+          "cafe": "A cozy café",
+          "beach": "A sunny beach",
+          "library": "An old library"
+        }
+      },
+      "moment": {
+        "title": "Which moment feels most like you?",
+        "options": {
+          "morning": "Early morning, fresh air",
+          "sunset": "Sunset and golden light",
+          "midnight": "Midnight and silence"
+        }
+      },
+      "families": {
+        "title": "Rate each scent family",
+        "subtitle": "Rate each one from 1 (low) to 5 (high) based on how much you like it"
+      },
+      "occasion": {
+        "title": "Where will you wear it most?",
+        "options": { "daily": "Everyday", "work": "At work", "party": "Parties" }
+      },
+      "season": {
+        "title": "Which season is it for?",
+        "options": { "warm": "Spring & summer", "cold": "Fall & winter", "all": "All seasons" }
+      },
+      "strength": {
+        "title": "How strong do you like it?",
+        "options": { "light": "Light", "medium": "Moderate", "strong": "Strong" }
+      }
+    }
+  },
+  "families": {
+    "woody": { "name": "Woody", "desc": "Warm and dry, like sandalwood and cedar" },
+    "citrus": { "name": "Citrus", "desc": "Fresh and lively, like lemon and bergamot" },
+    "floral": { "name": "Floral", "desc": "Soft and romantic, like rose and jasmine" },
+    "sweet": { "name": "Sweet", "desc": "Cozy and warm, like vanilla and caramel" },
+    "spicy": { "name": "Spicy", "desc": "Warm and passionate, like cinnamon and cardamom" },
+    "oud": { "name": "Oud / Musky", "desc": "Deep and luxurious, like oud and musk" },
+    "aquatic": { "name": "Aquatic", "desc": "Cool and clean, like sea breeze and rain" }
+  },
+  "results": {
+    "title": "Your Result",
+    "subtitle": "Based on your taste, these are your closest matches",
+    "topBadge": "Best Match",
+    "matchSuffix": "close to your taste",
+    "viewDetails": "Details",
+    "share": "Share Result",
+    "shareText": "Check out my perfume test result on Odora!",
+    "shareCopied": "Result link copied!",
+    "retake": "Retake the Test",
+    "retakeShared": "Take the test myself",
+    "sharedNote": "This result was shared with you — you can take the test too.",
+    "loading": "Preparing your result…",
+    "empty": "You haven't taken the test yet."
+  },
+  "catalog": {
+    "title": "Perfume Collection",
+    "subtitle": "{count} famous perfumes in the Odora database",
+    "all": "All"
+  },
+  "perfume": {
+    "notesTitle": "Main Notes",
+    "season": "Season",
+    "occasion": "Occasion",
+    "strength": "Strength",
+    "outOf5": "out of 5",
+    "buy": "Buy",
+    "buySoon": "Coming soon",
+    "back": "Back"
+  },
+  "common": {
+    "comingSoon": "This section will be built in the next phase.",
+    "backHome": "Back to Home"
+  },
+  "footer": {
+    "copy": "All rights reserved."
+  }
+}

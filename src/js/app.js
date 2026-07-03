@@ -5,9 +5,9 @@
  * (header + footer), registers routes, and starts the router.
  */
 
-import { loadLocale, t } from "./i18n/index.js";
-import { getState } from "./state/store.js";
-import { register, setNotFound, startRouter } from "./router.js";
+import { loadLocale, t, getLang } from "./i18n/index.js";
+import { getState, setState } from "./state/store.js";
+import { register, setNotFound, startRouter, resolve } from "./router.js";
 import { applyTheme, getMode, toggleMode } from "./ui/theme.js";
 import { sunIcon, moonIcon } from "./ui/icons.js";
 
@@ -31,6 +31,11 @@ function modeToggleIcon() {
   return getMode() === "dark" ? sunIcon("icon-mode") : moonIcon("icon-mode");
 }
 
+/** The language button shows the language you would switch TO. */
+function langToggleLabel() {
+  return getLang() === "fa" ? "EN" : "فا";
+}
+
 function headerHtml() {
   const links = NAV_LINKS.map(
     (l) => `<a href="${l.href}" data-nav>${t(l.key)}</a>`
@@ -45,6 +50,7 @@ function headerHtml() {
         </a>
         <nav class="main-nav" id="mainNav" aria-label="${t("nav.menu")}">${links}</nav>
         <div class="header-actions">
+          <button class="lang-toggle" id="langToggle" type="button" aria-label="${t("nav.toggleLang")}">${langToggleLabel()}</button>
           <button class="mode-toggle" id="modeToggle" type="button" aria-label="${t("nav.toggleMode")}">${modeToggleIcon()}</button>
           <button class="nav-toggle" id="navToggle" aria-label="${t("nav.menu")}" aria-expanded="false">
             <span></span>
@@ -95,6 +101,17 @@ function wireNav() {
   modeBtn?.addEventListener("click", () => {
     toggleMode();
     modeBtn.innerHTML = modeToggleIcon();
+  });
+
+  // language switch: reload the locale, then re-render shell + current page
+  const langBtn = document.getElementById("langToggle");
+  langBtn?.addEventListener("click", async () => {
+    const next = getLang() === "fa" ? "en" : "fa";
+    setState({ lang: next });
+    await loadLocale(next);
+    document.title = t("meta.title");
+    renderShell();
+    resolve();
   });
 }
 

@@ -83,6 +83,18 @@ main { flex: 1; }
 .mode-toggle:hover { color: var(--primary); border-color: var(--border); }
 .mode-toggle svg { width: 20px; height: 20px; }
 
+.lang-toggle {
+  display: grid; place-items: center;
+  min-width: 42px; height: 42px; padding: 0 0.6rem; border-radius: 11px;
+  background: var(--surface); border: 1px solid var(--border-soft); color: var(--text);
+  font-size: 0.85rem; font-weight: 600;
+  transition: color .2s, border-color .2s, background-color .2s;
+}
+.lang-toggle:hover { color: var(--primary); border-color: var(--border); }
+
+/* English mode: Latin-first font stack (direction flips via html[dir]) */
+html[lang="en"] body { font-family: "Poppins", "Vazirmatn", system-ui, -apple-system, "Segoe UI", sans-serif; }
+
 .nav-toggle {
   display: none;
   width: 42px; height: 42px; border-radius: 11px;

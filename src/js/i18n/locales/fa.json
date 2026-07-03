@@ -12,7 +12,8 @@
     "contact": "تماس با ما",
     "catalog": "گنجینه",
     "menu": "منو",
-    "toggleMode": "روز / شب"
+    "toggleMode": "روز / شب",
+    "toggleLang": "تغییر زبان"
   },
   "home": {
     "eyebrow": "کشف عطر بر پایهٔ حس تو",
