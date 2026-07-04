@@ -623,6 +623,7 @@ html[lang="en"] body { font-family: "Poppins", "Vazirmatn", system-ui, -apple-sy
   background: var(--surface); border: 1px solid var(--border); color: var(--primary);
 }
 .icon-avatar { width: 36px; height: 36px; }
+.auth-tabs { margin-top: 1.6rem; }
 .account-form { max-width: 420px; margin-inline: auto; }
 .account-form .btn { justify-self: stretch; }
 .account-note { font-size: 0.85rem; margin-top: 1.2rem; }

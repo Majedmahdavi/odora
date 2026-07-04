@@ -1,6 +1,8 @@
 import { t } from "../i18n/index.js";
 import { bottleIcon, heartIcon } from "./icons.js";
-import { isFavorite, toggleFavorite } from "../state/store.js";
+import { getState, isFavorite, toggleFavorite } from "../state/store.js";
+import { navigate } from "../router.js";
+import { toast } from "./toast.js";
 
 /**
  * Shared perfume card (catalog, favorites, "similar" strip).
@@ -35,6 +37,11 @@ export function wireFavButtons(gridEl, onToggle) {
     const btn = e.target.closest("[data-fav-id]");
     if (!btn) return;
     e.preventDefault();
+    if (!getState().user?.token) { // favorites need a signed-in account
+      toast(t("favorites.needAccount"));
+      navigate("/account");
+      return;
+    }
     const id = btn.dataset.favId;
     toggleFavorite(id);
     const on = isFavorite(id);

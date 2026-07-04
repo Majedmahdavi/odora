@@ -16,31 +16,46 @@ export function renderAccount(view) {
   else profile(view, user);
 }
 
-/* --- sign in / sign up (one step) ---------------------------------------- */
-function loginForm(view) {
+/* --- sign in | sign up (separate tabs) ------------------------------------ */
+function loginForm(view, mode = "login") {
+  const isLogin = mode === "login";
+
   view.innerHTML = `
     <section class="container info-page info-center account-page">
       <div class="account-avatar">${userIcon("icon-avatar")}</div>
-      <h1 class="section-title">${t("account.loginTitle")}</h1>
+      <h1 class="section-title">${isLogin ? t("account.loginTitle") : t("account.registerTitle")}</h1>
       <p class="muted account-note">${t("account.localNote")}</p>
 
+      <div class="catalog-tabs auth-tabs" role="tablist">
+        <button class="cat-tab ${isLogin ? "is-active" : ""}" type="button" data-mode="login"
+          role="tab" aria-selected="${isLogin}">${t("account.tabLogin")}</button>
+        <button class="cat-tab ${isLogin ? "" : "is-active"}" type="button" data-mode="register"
+          role="tab" aria-selected="${!isLogin}">${t("account.tabRegister")}</button>
+      </div>
+
       <form class="contact-form account-form" id="accountForm" novalidate>
+        ${isLogin ? "" : `
         <div class="field">
           <label for="accName">${t("account.name")}</label>
-          <input id="accName" type="text" autocomplete="name" />
-        </div>
+          <input id="accName" type="text" autocomplete="name" required />
+        </div>`}
         <div class="field">
           <label for="accEmail">${t("account.email")}</label>
           <input id="accEmail" type="email" autocomplete="email" required />
         </div>
         <div class="field">
           <label for="accPass">${t("account.password")}</label>
-          <input id="accPass" type="password" autocomplete="current-password" required minlength="6" placeholder="${t("account.passwordHint")}" />
+          <input id="accPass" type="password" autocomplete="${isLogin ? "current-password" : "new-password"}" required minlength="6" placeholder="${t("account.passwordHint")}" />
         </div>
-        <button class="btn btn-primary" type="submit">${t("account.submit")}</button>
+        <button class="btn btn-primary" type="submit">${isLogin ? t("account.submitLogin") : t("account.submitRegister")}</button>
       </form>
     </section>
   `;
+
+  view.querySelector(".auth-tabs").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-mode]");
+    if (btn && btn.dataset.mode !== mode) loginForm(view, btn.dataset.mode);
+  });
 
   view.querySelector("#accountForm").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -48,22 +63,25 @@ function loginForm(view) {
       e.target.reportValidity();
       return;
     }
-    const btn = e.target.querySelector("button");
+    const btn = e.target.querySelector("button[type=submit]");
     btn.disabled = true;
     try {
       const res = await fetch("/api/auth/enter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: view.querySelector("#accName").value.trim(),
+          mode,
+          name: view.querySelector("#accName")?.value.trim() ?? "",
           email: view.querySelector("#accEmail").value.trim(),
           password: view.querySelector("#accPass").value,
         }),
       });
       const body = await res.json().catch(() => ({}));
 
-      if (res.status === 404 && body.error === "needs-name") {
-        toast(t("account.errNeedsName"));
+      if (res.status === 404) {
+        toast(t("account.errNoAccount"));
+      } else if (res.status === 409) {
+        toast(t("account.errEmailExists"));
       } else if (res.status === 401) {
         toast(t("account.errBadPassword"));
       } else if (res.ok) {

@@ -4,8 +4,22 @@ import { getPerfumeById } from "../data/perfumes.js";
 import { perfumeCard, wireFavButtons } from "../ui/perfumeCard.js";
 import { toFaDigits } from "../utils/format.js";
 
-/** علاقه‌مندی‌ها — hearted perfumes, stored locally (no login required). */
+/** علاقه‌مندی‌ها — hearted perfumes, tied to the signed-in account. */
 export function renderFavorites(view) {
+  if (!getState().user?.token) {
+    view.innerHTML = `
+      <section class="container catalog">
+        <div class="section-head">
+          <h1 class="section-title">${t("favorites.title")}</h1>
+        </div>
+        <div class="empty-state">
+          <p>${t("favorites.needAccountLead")}</p>
+          <a class="btn btn-primary" href="#/account">${t("giftTest.goAccount")}</a>
+        </div>
+      </section>`;
+    return;
+  }
+
   view.innerHTML = `
     <section class="container catalog">
       <div class="section-head">

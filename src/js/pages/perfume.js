@@ -134,9 +134,14 @@ export function renderPerfume(view, params) {
     else navigate("/catalog");
   });
 
-  // favorite toggle
+  // favorite toggle (needs a signed-in account)
   const favBtn = view.querySelector("#favBtn");
   favBtn.addEventListener("click", () => {
+    if (!getState().user?.token) {
+      toast(t("favorites.needAccount"));
+      navigate("/account");
+      return;
+    }
     toggleFavorite(pf.id);
     const on = isFavorite(pf.id);
     favBtn.classList.toggle("is-fav", on);

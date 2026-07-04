@@ -36,7 +36,8 @@
       "Bash(timeout 60 \"/c/Program Files/PuTTY/plink.exe\" -batch -ssh -P 9011 -hostkey \"SHA256:b3vXN/w4PoWTpv4QiOGf3fYzNEzo6GfanGkPd3uFgNw\" -pwfile vps_pw.txt root@84.32.10.66 \"curl -s -w '\\\\nHTTP:%{http_code}\\\\n' -X POST http://localhost:8600/api/auth/enter -H 'Content-Type: application/json' -d '{\\\\\"name\\\\\":\\\\\"Dbg\\\\\",\\\\\"email\\\\\":\\\\\"dbg1@example.com\\\\\",\\\\\"password\\\\\":\\\\\"secret123\\\\\"}'; journalctl -u odora-api -n 15 --no-pager | tail -12\")",
       "Bash(printf '{\\\\n  \"siteBase\": \"http://84.32.10.66/\",\\\\n  \"smtp\": {\\\\n    \"host\": \"\",\\\\n    \"port\": 587,\\\\n    \"user\": \"\",\\\\n    \"password\": \"\",\\\\n    \"from\": \"\",\\\\n    \"tls\": true\\\\n  }\\\\n}\\\\n')",
       "Bash(timeout 60 \"/c/Program Files/PuTTY/plink.exe\" -batch -ssh -P 9011 -hostkey \"SHA256:b3vXN/w4PoWTpv4QiOGf3fYzNEzo6GfanGkPd3uFgNw\" -pwfile vps_pw.txt root@84.32.10.66 \"test -f /opt/odora-api/config.json && echo exists || cat > /opt/odora-api/config.json\")",
-      "Bash(timeout 60 \"/c/Program Files/PuTTY/plink.exe\" -batch -ssh -P 9011 -hostkey \"SHA256:b3vXN/w4PoWTpv4QiOGf3fYzNEzo6GfanGkPd3uFgNw\" -pwfile vps_pw.txt root@84.32.10.66 \"chown www-data:www-data /opt/odora-api/config.json 2>/dev/null; ls -la /opt/odora-api/ | tail -4 && curl -s http://localhost/api/health\")"
+      "Bash(timeout 60 \"/c/Program Files/PuTTY/plink.exe\" -batch -ssh -P 9011 -hostkey \"SHA256:b3vXN/w4PoWTpv4QiOGf3fYzNEzo6GfanGkPd3uFgNw\" -pwfile vps_pw.txt root@84.32.10.66 \"chown www-data:www-data /opt/odora-api/config.json 2>/dev/null; ls -la /opt/odora-api/ | tail -4 && curl -s http://localhost/api/health\")",
+      "Bash(timeout 90 \"/c/Program Files/PuTTY/plink.exe\" -batch -ssh -P 9011 -hostkey \"SHA256:b3vXN/w4PoWTpv4QiOGf3fYzNEzo6GfanGkPd3uFgNw\" -pwfile vps_pw.txt root@84.32.10.66 \"cd /var/www/odora && git pull 2>&1 | tail -1 && git log --oneline -1 && systemctl is-active odora-api nginx\")"
     ]
   }
 }
