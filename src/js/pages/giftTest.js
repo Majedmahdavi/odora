@@ -67,10 +67,37 @@ export function renderGiftTestCreate(view) {
           <button class="btn btn-primary" type="submit">${t("giftTest.create")}</button>
         </form>
 
+        <div class="gift-link-result" id="gtResult" hidden>
+          <p class="gift-link-ready">${t("giftTest.linkReady")}</p>
+          <p class="muted">${t("giftTest.linkHint")}</p>
+          <input class="gift-link-box latin" id="gtLink" type="text" readonly dir="ltr" />
+          <button class="btn btn-primary" id="gtCopy" type="button">${t("giftTest.copyBtn")}</button>
+        </div>
+
         <p class="muted account-note">${t("giftTest.freeNote")}</p>
       </div>
     </section>
   `;
+
+  // robust copy: clipboard API needs https — fall back to select + execCommand
+  async function copyLink() {
+    const input = view.querySelector("#gtLink");
+    input.focus();
+    input.select();
+    input.setSelectionRange(0, input.value.length);
+    let done = false;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(input.value);
+        done = true;
+      }
+    } catch { /* fall through */ }
+    if (!done) {
+      try { done = document.execCommand("copy"); } catch { /* manual it is */ }
+    }
+    toast(done ? t("giftTest.copied") : t("giftTest.copyManual"));
+  }
+  view.querySelector("#gtCopy").addEventListener("click", copyLink);
 
   view.querySelector("#gtForm").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -93,13 +120,11 @@ export function renderGiftTestCreate(view) {
 
       addMyGift({ id: body.id, secret: body.secret, createdAt: Date.now() });
       const link = `${location.origin}${location.pathname}#/gtest?g=${body.id}`;
-      try {
-        await navigator.clipboard.writeText(link);
-      } catch {
-        window.prompt(t("giftTest.create"), link); // clipboard blocked → manual copy
-      }
-      toast(t("giftTest.copied"));
-      e.target.reset();
+      const box = view.querySelector("#gtResult");
+      view.querySelector("#gtLink").value = link;
+      box.hidden = false;
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+      copyLink(); // best effort — the visible box is the source of truth
     } catch {
       toast(t("giftTest.serverError"));
     } finally {

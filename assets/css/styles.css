@@ -574,6 +574,20 @@ html[lang="en"] body { font-family: "Poppins", "Vazirmatn", system-ui, -apple-sy
   border-radius: 16px; padding: 1.1rem;
 }
 .gift-form[hidden] { display: none; }
+
+.gift-link-result {
+  display: grid; gap: 0.7rem; margin-top: 1.5rem; width: 100%; max-width: 480px;
+  margin-inline: auto; padding: 1.1rem;
+  background: var(--bg-2); border: 1px solid var(--border); border-radius: 16px;
+}
+.gift-link-result[hidden] { display: none; }
+.gift-link-ready { font-weight: 700; color: var(--primary); }
+.gift-link-box {
+  width: 100%; font-family: "Poppins", monospace; font-size: 0.82rem;
+  color: var(--text); background: var(--surface); border: 1px solid var(--border-soft);
+  border-radius: 12px; padding: 0.75rem 0.9rem; text-align: left;
+}
+.gift-link-box:focus { outline: none; border-color: var(--primary); }
 .gift-form .btn { justify-self: start; }
 
 .gift-page { padding-block: clamp(2.5rem, 2rem + 4vw, 4.5rem); max-width: 640px; }
