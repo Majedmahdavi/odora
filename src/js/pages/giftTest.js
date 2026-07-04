@@ -16,8 +16,12 @@ import { giftIcon } from "../ui/icons.js";
 const API = "/api";
 
 async function api(path, options) {
+  const token = getState().user?.token;
   const res = await fetch(API + path, {
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
     ...options,
   });
   const body = await res.json().catch(() => ({}));
@@ -28,8 +32,8 @@ async function api(path, options) {
 export function renderGiftTestCreate(view) {
   const user = getState().user;
 
-  // the whole feature requires an account: results are tied to your panel
-  if (!user) {
+  // the whole feature requires a signed-in account: results land in your panel
+  if (!user?.token) {
     view.innerHTML = `
       <section class="container gift-page">
         <div class="gift-card">

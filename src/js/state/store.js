@@ -13,10 +13,10 @@ const defaultState = {
   mode: "dark", // day/night: dark | light (global user choice)
   gender: null, // feminine | masculine | unisex
   answers: {}, // quiz answers, filled in Step 3
-  favorites: [], // hearted perfume ids
-  user: null, // local account { name, email, since } — backend later
+  favorites: [], // hearted perfume ids (synced to the server when signed in)
+  user: null, // server account { token, name, email, since } — set by pages/account.js
   giftMode: null, // surprise gift test { id, n: sender name } — set by #/gtest
-  myGifts: [], // gift links I created: { id, secret, createdAt } (server holds the rest)
+  myGifts: [], // pre-account gift links { id, secret, createdAt } (legacy, still readable)
 };
 
 function load() {
@@ -70,5 +70,18 @@ export function toggleFavorite(id) {
   const favorites = isFavorite(id)
     ? state.favorites.filter((f) => f !== id)
     : [...state.favorites, id];
-  return setState({ favorites });
+  const next = setState({ favorites });
+  syncFavorites(); // fire-and-forget when signed in
+  return next;
+}
+
+/** Push the favorites list to the account on the server (best effort). */
+export function syncFavorites() {
+  const user = state.user;
+  if (!user?.token) return;
+  fetch("/api/me/favorites", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${user.token}` },
+    body: JSON.stringify({ favorites: state.favorites }),
+  }).catch(() => { /* offline — local copy still rules */ });
 }

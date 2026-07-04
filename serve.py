@@ -26,11 +26,14 @@ class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
     def proxy_api(self):
         length = int(self.headers.get("Content-Length", 0))
         body = self.rfile.read(length) if length else None
+        fwd_headers = {"Content-Type": self.headers.get("Content-Type", "application/json")}
+        if self.headers.get("Authorization"):
+            fwd_headers["Authorization"] = self.headers["Authorization"]
         req = urllib.request.Request(
             API_UPSTREAM + self.path,
             data=body,
             method=self.command,
-            headers={"Content-Type": self.headers.get("Content-Type", "application/json")},
+            headers=fwd_headers,
         )
         try:
             with urllib.request.urlopen(req, timeout=20) as res:
@@ -53,6 +56,11 @@ class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):
+        if self.path.startswith("/api/"):
+            return self.proxy_api()
+        self.send_error(501)
+
+    def do_PUT(self):
         if self.path.startswith("/api/"):
             return self.proxy_api()
         self.send_error(501)
