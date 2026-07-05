@@ -22,17 +22,20 @@
   --grad-hero: radial-gradient(1100px 620px at 78% -8%, rgba(212,175,55,0.16), transparent 60%),
                radial-gradient(760px 520px at 8% 108%, rgba(212,175,55,0.08), transparent 60%);
 }
+/* DAY mode of the general palette — neutral premium (white + light gray +
+   dark type + gold as the ONE elegant accent). Feminine/masculine palettes
+   and the dark mode are intentionally left untouched. */
 :root[data-theme="default"][data-mode="light"],
 :root[data-theme="unisex"][data-mode="light"] {
   color-scheme: light;
-  --bg: #f7f3ea;  --bg-2: #eee7d8;  --surface: #ffffff;  --surface-2: #f4ecdb;
-  --text: #24211a;  --text-muted: #6d6759;  --text-faint: #a69c88;
-  --primary: #a9801f;  --primary-soft: #d3b25a;  --primary-deep: #856419;  --on-primary: #ffffff;
-  --border: rgba(169,128,31,0.30);  --border-soft: rgba(36,33,26,0.10);
-  --glow: rgba(169,128,31,0.20);  --shadow: rgba(120,100,60,0.14);
-  --grad-primary: linear-gradient(135deg,#d9b95e 0%,#bb902e 55%,#8f6c1f 100%);
-  --grad-hero: radial-gradient(1100px 620px at 78% -8%, rgba(169,128,31,0.14), transparent 60%),
-               radial-gradient(760px 520px at 8% 108%, rgba(169,128,31,0.07), transparent 60%);
+  --bg: #ffffff;  --bg-2: #f6f7f8;  --surface: #ffffff;  --surface-2: #f3f4f6;
+  --text: #191920;  --text-muted: #6a6b72;  --text-faint: #9a9ba2;
+  --primary: #a67c1e;  --primary-soft: #c8a349;  --primary-deep: #866317;  --on-primary: #ffffff;
+  --border: rgba(24,24,30,0.10);  --border-soft: rgba(24,24,30,0.055);
+  --glow: rgba(150,116,40,0.12);  --shadow: rgba(20,22,30,0.10);
+  --grad-primary: linear-gradient(135deg,#c9a34a 0%,#a67c1e 58%,#876418 100%);
+  --grad-hero: radial-gradient(1100px 620px at 78% -8%, rgba(166,124,30,0.05), transparent 60%),
+               radial-gradient(760px 520px at 8% 108%, rgba(28,30,38,0.02), transparent 60%);
 }
 
 /* ---------- FEMININE — رزگلد ----------
