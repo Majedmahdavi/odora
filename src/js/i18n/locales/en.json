@@ -40,7 +40,64 @@
         "title": "Get your perfumes",
         "text": "The five best-matching perfumes, each with a match percentage."
       }
-    ]
+    ],
+    "hero": {
+      "badge": "AI-powered fragrance discovery",
+      "title": "Discover Your Signature Scent",
+      "subtitle": "Answer a few carefully designed questions and let Odora understand your fragrance personality and recommend perfumes that truly match your taste.",
+      "ctaPrimary": "Discover My Fragrance DNA",
+      "ctaSecondary": "How It Works"
+    },
+    "features": {
+      "eyebrow": "Why Odora",
+      "title": "It starts with understanding you",
+      "cards": [
+        { "title": "Fragrance Personality", "text": "Discover what types of scents naturally fit your personality." },
+        { "title": "Smart Recommendations", "text": "Receive personalized perfume recommendations instead of browsing thousands of fragrances." },
+        { "title": "Gift Finder", "text": "Help someone else discover the perfect fragrance." }
+      ]
+    },
+    "how": {
+      "eyebrow": "How it works",
+      "title": "Three steps to your scent identity",
+      "steps": [
+        { "title": "Answer a few questions", "text": "A few carefully designed questions about moods, moments and preferences." },
+        { "title": "Odora builds your Fragrance Profile", "text": "Your answers become a unique numeric profile of scent families." },
+        { "title": "Receive personalized recommendations", "text": "Fragrances matched to your profile — each with a clear explanation." }
+      ]
+    },
+    "dna": {
+      "eyebrow": "Fragrance DNA",
+      "title": "Your taste, translated into a profile",
+      "axes": [
+        { "label": "Freshness", "value": 90 },
+        { "label": "Woody", "value": 80 },
+        { "label": "Green", "value": 70 },
+        { "label": "Amber", "value": 50 },
+        { "label": "Sweet", "value": 20 }
+      ],
+      "caption": "Your Fragrance DNA is a unique scent profile built from your preferences. Every recommendation is based on this profile.",
+      "cta": "Discover Mine"
+    },
+    "sample": {
+      "eyebrow": "Sample recommendation",
+      "title": "See what a match looks like",
+      "pick": "Best match",
+      "name": "Bleu de Chanel",
+      "compatLabel": "Compatibility",
+      "whyTitle": "Why it matches",
+      "reasons": ["Fresh", "Woody", "Elegant", "Office Friendly"],
+      "note": "Recommendations are different for every user."
+    },
+    "gift": {
+      "title": "Looking for the perfect fragrance gift?",
+      "text": "Let Odora understand their fragrance preferences and recommend the perfect perfume.",
+      "cta": "Start Gift Discovery"
+    },
+    "finalCta": {
+      "title": "Your perfect fragrance starts with understanding yourself.",
+      "cta": "Start Discovering"
+    }
   },
   "about": {
     "title": "About Us",

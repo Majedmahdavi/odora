@@ -48,6 +48,64 @@ export function giftIcon(className = "") {
   </svg>`;
 }
 
+/** Sparkle — AI / smart. */
+export function sparkleIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3c.5 4.3 3.4 7.2 7.7 7.7C15.4 11.2 12.5 14.1 12 18.4c-.5-4.3-3.4-7.2-7.7-7.7C8.6 10.2 11.5 7.3 12 3Z"/>
+    <path d="M18.5 15.5c.2 1.6 1.2 2.6 2.8 2.8-1.6.2-2.6 1.2-2.8 2.8-.2-1.6-1.2-2.6-2.8-2.8 1.6-.2 2.6-1.2 2.8-2.8Z"/>
+  </svg>`;
+}
+
+/** Fingerprint — personality / identity. */
+export function fingerprintIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 11v3.5"/>
+    <path d="M8.5 12a3.5 3.5 0 0 1 7 0v2a5 5 0 0 1-.4 2"/>
+    <path d="M5.5 12a6.5 6.5 0 0 1 13 0v1.5a9 9 0 0 1-.6 3.3"/>
+    <path d="M8.4 18.6A6.5 6.5 0 0 0 9 16v-4a3 3 0 0 1 6 0"/>
+    <path d="M4.9 8.2a8 8 0 0 1 13.8 1.3"/>
+  </svg>`;
+}
+
+/** Target — smart recommendation / discovery. */
+export function targetIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="8.5"/>
+    <circle cx="12" cy="12" r="4.5"/>
+    <circle cx="12" cy="12" r="1" fill="currentColor"/>
+  </svg>`;
+}
+
+/** Speech bubble — answer questions. */
+export function chatIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M20 15a2.5 2.5 0 0 1-2.5 2.5H9l-4 3v-3H6.5A2.5 2.5 0 0 1 4 15V7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5Z"/>
+    <path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/>
+  </svg>`;
+}
+
+/** DNA double helix — fragrance profile. */
+export function dnaIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M7 3c0 4.5 10 5.5 10 9s-10 4.5-10 9"/>
+    <path d="M17 3c0 4.5-10 5.5-10 9s10 4.5 10 9"/>
+    <path d="M8 6.5h8M8.8 9h6.4M8.8 15h6.4M8 17.5h8"/>
+  </svg>`;
+}
+
+/** Chevron / arrow pointing down — step connector. */
+export function arrowDownIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 4.5v15M6.5 13.5 12 19l5.5-5.5"/>
+  </svg>`;
+}
+
 /** Minimal, elegant perfume bottle outline. */
 export function bottleIcon(className = "") {
   return `
