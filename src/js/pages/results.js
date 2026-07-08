@@ -1,4 +1,4 @@
-import { t } from "../i18n/index.js";
+import { t, getLang } from "../i18n/index.js";
 import { getState, setState } from "../state/store.js";
 import { navigate } from "../router.js";
 import { recommend } from "../matching/index.js";
@@ -7,6 +7,7 @@ import { toFaDigits } from "../utils/format.js";
 import { buildShareLink, decodeState } from "../utils/share.js";
 import { toast } from "../ui/toast.js";
 import { applyTheme } from "../ui/theme.js";
+import { buildDna, topAxes } from "../discovery/dna.js";
 
 /**
  * صفحه‌ی نتایج (Step 6)
@@ -33,13 +34,30 @@ export async function renderResults(view, params = {}) {
 
   view.innerHTML = `<section class="container results"><div class="results-loading">${t("results.loading")}</div></section>`;
 
-  const { top } = await recommend(sourceState);
-  view.innerHTML = buildHtml(top, shared);
+  const { top, profile } = await recommend(sourceState);
+  const dna = buildDna(profile);
+  view.innerHTML = buildHtml(top, shared, dna);
   wireActions(view, sourceState, shared);
 }
 
 /* ---------- markup ---------- */
-function buildHtml(top, shared) {
+function quickSummary(dna) {
+  const sep = getLang() === "fa" ? "، " : ", ";
+  const axes = topAxes(dna, 3).map((ax) => t(`discovery.axes.${ax}`)).join(sep);
+  return `<p class="results-quick">${t("discovery.quick.summary").replace("{axes}", axes)}</p>`;
+}
+
+function discoveryTeaser() {
+  return `
+    <section class="dsc-teaser">
+      <span class="dsc-eyebrow">${t("discovery.teaser.eyebrow")}</span>
+      <h2 class="dsc-teaser-title">${t("discovery.teaser.title")}</h2>
+      <p class="dsc-teaser-text">${t("discovery.teaser.text")}</p>
+      <a class="btn btn-primary btn-lg" href="#/discovery">${t("discovery.teaser.cta")}</a>
+    </section>`;
+}
+
+function buildHtml(top, shared, dna) {
   if (!top.length) {
     return `
       <section class="container page">
@@ -56,11 +74,14 @@ function buildHtml(top, shared) {
       <div class="section-head">
         <h1 class="section-title">${t("results.title")}</h1>
         <p>${t("results.subtitle")}</p>
+        ${quickSummary(dna)}
       </div>
 
       ${heroCard(top[0])}
 
       <div class="results-list">${rows}</div>
+
+      ${shared ? "" : discoveryTeaser()}
 
       <div class="results-actions">
         <button class="btn btn-primary" id="shareBtn" type="button">${t("results.share")}</button>

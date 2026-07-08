@@ -17,6 +17,7 @@ import { renderContact } from "./pages/contact.js";
 import { renderGender } from "./pages/gender.js";
 import { renderQuiz } from "./pages/quiz.js";
 import { renderResults } from "./pages/results.js";
+import { renderDiscovery } from "./pages/discovery.js";
 import { renderCatalog } from "./pages/catalog.js";
 import { renderPerfume } from "./pages/perfume.js";
 import { renderFavorites } from "./pages/favorites.js";
@@ -167,6 +168,7 @@ async function boot() {
   register("/gender", page(renderGender, "gender"));
   register("/quiz", page(renderQuiz, "gender"));
   register("/results", page(renderResults, "gender"));
+  register("/discovery", page(renderDiscovery, "gender"));
   register("/perfume/:id", page(renderPerfume, "self"));
   setNotFound(page(renderHome, "general"));
 

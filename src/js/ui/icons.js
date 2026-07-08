@@ -106,6 +106,33 @@ export function arrowDownIcon(className = "") {
   </svg>`;
 }
 
+/** Compass — explorer / adventurer. */
+export function compassIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="8.5"/>
+    <path d="M15.5 8.5 13 13l-4.5 2.5L11 11z"/>
+  </svg>`;
+}
+
+/** Leaf — minimalist / free spirit / green. */
+export function leafIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M5 19c0-8 5-13 14-13 0 9-5 14-13 14a5 5 0 0 1-1-1Z"/>
+    <path d="M5 19c2-4 5-7 9-9"/>
+  </svg>`;
+}
+
+/** Crown — gentleman / collector (subtle luxury). */
+export function crownIcon(className = "") {
+  return `
+  <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 8.5 6.5 16h11L20 8.5l-4 3-4-5.5-4 5.5-4-3Z"/>
+    <path d="M6.5 19h11"/>
+  </svg>`;
+}
+
 /** Minimal, elegant perfume bottle outline. */
 export function bottleIcon(className = "") {
   return `

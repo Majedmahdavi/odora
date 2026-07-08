@@ -99,6 +99,92 @@
       "cta": "Start Discovering"
     }
   },
+  "discovery": {
+    "back": "Back",
+    "axes": {
+      "fresh": "Fresh", "woody": "Woody", "amber": "Amber", "floral": "Floral",
+      "green": "Green", "marine": "Marine", "leather": "Leather", "sweet": "Sweet", "gourmand": "Gourmand"
+    },
+    "quick": { "summary": "You seem to lean toward {axes} fragrances." },
+    "teaser": {
+      "eyebrow": "Optional discovery",
+      "title": "Want to know WHY these fragrances fit you?",
+      "text": "Discover your personal fragrance identity and understand what makes these recommendations uniquely yours.",
+      "cta": "Discover My Fragrance DNA"
+    },
+    "analyzing": {
+      "messages": [
+        "Analyzing your fragrance preferences…",
+        "Identifying scent patterns…",
+        "Building your Fragrance DNA…",
+        "Preparing your personalized report…"
+      ]
+    },
+    "dna": {
+      "eyebrow": "Fragrance DNA",
+      "title": "This is your Fragrance DNA",
+      "lead": "A unique scent profile built from your answers — every recommendation is based on it.",
+      "cta": "Continue"
+    },
+    "identity": {
+      "eyebrow": "Fragrance Identity",
+      "title": "Here's what we understand about you",
+      "cta": "Continue",
+      "statements": {
+        "freshOverSweet": "You enjoy freshness more than sweetness.",
+        "subtleLuxury": "You appreciate subtle luxury over loud attention.",
+        "floralSoul": "You're drawn to soft, expressive floral character.",
+        "cleanAiry": "You gravitate toward clean, airy freshness.",
+        "warmDepth": "You're drawn to warm, comforting depth.",
+        "grounded": "You feel at home in grounded, woody warmth.",
+        "balanced": "You naturally prefer elegant, clean and balanced fragrances."
+      },
+      "signatures": {
+        "freshElegance": "Fresh Elegance",
+        "oceanBreeze": "Ocean Breeze",
+        "quietConfidence": "Quiet Confidence",
+        "modernGentleman": "Modern Gentleman",
+        "goldenSunset": "Golden Sunset",
+        "urbanExplorer": "Urban Explorer",
+        "bloomingGrace": "Blooming Grace",
+        "sweetIndulgence": "Sweet Indulgence",
+        "velvetWarmth": "Velvet Warmth"
+      }
+    },
+    "signature": {
+      "eyebrow": "Signature Identity",
+      "kicker": "Your fragrance signature is",
+      "lead": "A name that captures the mood you carry.",
+      "cta": "Reveal my archetype"
+    },
+    "archetype": {
+      "eyebrow": "Fragrance Archetype",
+      "stylesLabel": "Preferred styles",
+      "cta": "See my recommendations"
+    },
+    "arch": {
+      "minimalist": { "name": "The Minimalist", "desc": "You value clarity and restraint — clean, quiet scents that feel effortless and refined.", "traits": ["Calm", "Refined", "Effortless"], "styles": "Fresh, green, clean musks" },
+      "explorer": { "name": "The Explorer", "desc": "You're curious and open — airy, expansive scents that feel like fresh horizons.", "traits": ["Curious", "Free", "Energetic"], "styles": "Marine, citrus, aromatic" },
+      "gentleman": { "name": "The Gentleman", "desc": "You carry quiet authority — warm woods and leather with timeless elegance.", "traits": ["Confident", "Classic", "Elegant"], "styles": "Woody, leather, amber" },
+      "dreamer": { "name": "The Dreamer", "desc": "You feel deeply — soft florals and gentle sweetness with a romantic soul.", "traits": ["Romantic", "Gentle", "Expressive"], "styles": "Floral, powdery, soft sweet" },
+      "adventurer": { "name": "The Adventurer", "desc": "You chase the next horizon — bold fresh-woody scents built for movement.", "traits": ["Bold", "Active", "Spontaneous"], "styles": "Aquatic, woody, aromatic" },
+      "creator": { "name": "The Creator", "desc": "You blend the unexpected — rich, layered scents with artistic depth.", "traits": ["Artistic", "Original", "Layered"], "styles": "Amber, woody-floral, gourmand" },
+      "collector": { "name": "The Collector", "desc": "You savor richness — deep amber, leather and gourmand with a luxurious presence.", "traits": ["Refined", "Indulgent", "Bold"], "styles": "Amber, leather, gourmand" },
+      "freeSpirit": { "name": "The Free Spirit", "desc": "You follow feeling — bright florals and fresh air with a light, joyful heart.", "traits": ["Joyful", "Light", "Warm"], "styles": "Floral, fresh, fruity" }
+    },
+    "report": {
+      "eyebrow": "Recommendation Report",
+      "title": "Now, why each one is yours",
+      "lead": "Because we understand you, every match comes with a reason.",
+      "compat": "Compatibility",
+      "notes": "Notes",
+      "strengths": "Strengths",
+      "timeLabel": "Time of day",
+      "time": { "day": "Daytime", "evening": "Evening", "versatile": "Anytime" },
+      "reason": "Recommended because your profile has a strong {family} character.",
+      "quickResults": "Back to quick results"
+    }
+  },
   "about": {
     "title": "About Us",
     "lead": "Odora discovers your scent with you.",
