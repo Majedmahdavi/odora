@@ -5,7 +5,7 @@ import {
   fingerprintIcon,
   targetIcon,
   chatIcon,
-  dnaIcon,
+  helixIcon,
   giftIcon,
   arrowDownIcon,
 } from "../ui/icons.js";
@@ -13,19 +13,19 @@ import {
 /**
  * Landing page (redesigned).
  * A premium "AI fragrance discovery" story — hero → features → how it works
- * → Fragrance DNA preview → sample recommendation → gift → final CTA.
+ * → Scent Signature preview → sample recommendation → gift → final CTA.
  * Pure presentation: every link points at EXISTING routes (#/gender,
  * #/gift-test); no routing / business logic is touched. All copy comes from
  * the i18n locale files (home.* keys).
  */
 
 const FEATURE_ICONS = [fingerprintIcon, sparkleIcon, giftIcon];
-const STEP_ICONS = [chatIcon, dnaIcon, targetIcon];
+const STEP_ICONS = [chatIcon, helixIcon, targetIcon];
 
 export function renderHome(view) {
   const features = t("home.features.cards") || [];
   const steps = t("home.how.steps") || [];
-  const dnaAxes = t("home.dna.axes") || [];
+  const signatureAxes = t("home.signature.axes") || [];
   const reasons = t("home.sample.reasons") || [];
 
   view.innerHTML = `
@@ -87,15 +87,15 @@ export function renderHome(view) {
         </ol>
       </section>
 
-      <!-- 4. FRAGRANCE DNA PREVIEW -->
+      <!-- 4. SCENT SIGNATURE PREVIEW -->
       <section class="lx-section container">
         <div class="lx-head reveal">
-          <span class="lx-eyebrow">${t("home.dna.eyebrow")}</span>
-          <h2 class="lx-title">${t("home.dna.title")}</h2>
+          <span class="lx-eyebrow">${t("home.signature.eyebrow")}</span>
+          <h2 class="lx-title">${t("home.signature.title")}</h2>
         </div>
         <div class="lx-dna-card reveal">
           <div class="lx-dna-bars">
-            ${dnaAxes
+            ${signatureAxes
               .map(
                 (a) => `
               <div class="lx-dna-row">
@@ -106,8 +106,8 @@ export function renderHome(view) {
               )
               .join("")}
           </div>
-          <p class="lx-dna-caption">${t("home.dna.caption")}</p>
-          <a class="btn btn-primary" href="#/gender">${t("home.dna.cta")}</a>
+          <p class="lx-dna-caption">${t("home.signature.caption")}</p>
+          <a class="btn btn-primary" href="#/gender">${t("home.signature.cta")}</a>
         </div>
       </section>
 
@@ -204,7 +204,7 @@ function wireScroll(view) {
   });
 }
 
-/* --- reveal-on-scroll + animated DNA bars (IntersectionObserver) ---------- */
+/* --- reveal-on-scroll + animated signature bars (IntersectionObserver) ---- */
 function wireReveal(view) {
   const items = view.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) {

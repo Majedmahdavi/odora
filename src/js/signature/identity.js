@@ -1,12 +1,12 @@
 /**
- * Fragrance Identity — describe the *person* from their DNA before showing
- * any perfume. Produces i18n statement keys (discovery.identity.statements.*)
- * and a memorable signature-name key (discovery.identity.signatures.*).
+ * Signature Identity — describe the *person* from their Scent Signature before
+ * showing any perfume. Produces i18n statement keys (signature.identity.statements.*)
+ * and a memorable signature-name key (signature.identity.names.*).
  * Pure, deterministic.
  */
-import { topAxes } from "./dna.js";
+import { topAxes } from "./scentSignature.js";
 
-const avg = (dna, keys) => keys.reduce((s, k) => s + (dna[k] ?? 0), 0) / keys.length;
+const avg = (sig, keys) => keys.reduce((s, k) => s + (sig[k] ?? 0), 0) / keys.length;
 
 // candidate identity statements, each scored by how strongly it applies
 const STATEMENTS = [
@@ -30,9 +30,9 @@ const SIGNATURE_BY_AXIS = {
   gourmand: "velvetWarmth",
 };
 
-/** dna → { statements: [key,...], signatureKey }. */
-export function buildIdentity(dna) {
-  const ranked = STATEMENTS.map((s) => ({ key: s.key, v: s.score(dna) }))
+/** signature → { statements: [key,...], nameKey }. */
+export function buildIdentity(signature) {
+  const ranked = STATEMENTS.map((s) => ({ key: s.key, v: s.score(signature) }))
     .filter((s) => s.v > 0)
     .sort((a, b) => b.v - a.v)
     .map((s) => s.key);
@@ -41,6 +41,6 @@ export function buildIdentity(dna) {
   const statements = ranked.slice(0, 3);
   if (statements.length < 2) statements.push("balanced");
 
-  const dominant = topAxes(dna, 1)[0];
-  return { statements, signatureKey: SIGNATURE_BY_AXIS[dominant] || "quietConfidence" };
+  const dominant = topAxes(signature, 1)[0];
+  return { statements, nameKey: SIGNATURE_BY_AXIS[dominant] || "quietConfidence" };
 }

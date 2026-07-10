@@ -45,7 +45,7 @@
       "badge": "AI-powered fragrance discovery",
       "title": "Discover Your Signature Scent",
       "subtitle": "Answer a few carefully designed questions and let Odora understand your fragrance personality and recommend perfumes that truly match your taste.",
-      "ctaPrimary": "Discover My Fragrance DNA",
+      "ctaPrimary": "Discover My Scent Signature",
       "ctaSecondary": "How It Works"
     },
     "features": {
@@ -66,9 +66,9 @@
         { "title": "Receive personalized recommendations", "text": "Fragrances matched to your profile — each with a clear explanation." }
       ]
     },
-    "dna": {
-      "eyebrow": "Fragrance DNA",
-      "title": "Your taste, translated into a profile",
+    "signature": {
+      "eyebrow": "Scent Signature",
+      "title": "Your taste, translated into a Scent Signature",
       "axes": [
         { "label": "Freshness", "value": 90 },
         { "label": "Woody", "value": 80 },
@@ -76,7 +76,7 @@
         { "label": "Amber", "value": 50 },
         { "label": "Sweet", "value": 20 }
       ],
-      "caption": "Your Fragrance DNA is a unique scent profile built from your preferences. Every recommendation is based on this profile.",
+      "caption": "Your Scent Signature is a unique scent profile built from your preferences. Every recommendation is based on it.",
       "cta": "Discover Mine"
     },
     "sample": {
@@ -99,7 +99,7 @@
       "cta": "Start Discovering"
     }
   },
-  "discovery": {
+  "signature": {
     "back": "Back",
     "axes": {
       "fresh": "Fresh", "woody": "Woody", "amber": "Amber", "floral": "Floral",
@@ -110,19 +110,19 @@
       "eyebrow": "Optional discovery",
       "title": "Want to know WHY these fragrances fit you?",
       "text": "Discover your personal fragrance identity and understand what makes these recommendations uniquely yours.",
-      "cta": "Discover My Fragrance DNA"
+      "cta": "Discover My Scent Signature"
     },
     "analyzing": {
       "messages": [
         "Analyzing your fragrance preferences…",
         "Identifying scent patterns…",
-        "Building your Fragrance DNA…",
+        "Building your Scent Signature…",
         "Preparing your personalized report…"
       ]
     },
-    "dna": {
-      "eyebrow": "Fragrance DNA",
-      "title": "This is your Fragrance DNA",
+    "profile": {
+      "eyebrow": "Scent Signature",
+      "title": "This is your Scent Signature",
       "lead": "A unique scent profile built from your answers — every recommendation is based on it.",
       "cta": "Continue"
     },
@@ -139,7 +139,7 @@
         "grounded": "You feel at home in grounded, woody warmth.",
         "balanced": "You naturally prefer elegant, clean and balanced fragrances."
       },
-      "signatures": {
+      "names": {
         "freshElegance": "Fresh Elegance",
         "oceanBreeze": "Ocean Breeze",
         "quietConfidence": "Quiet Confidence",
@@ -151,9 +151,9 @@
         "velvetWarmth": "Velvet Warmth"
       }
     },
-    "signature": {
-      "eyebrow": "Signature Identity",
-      "kicker": "Your fragrance signature is",
+    "name": {
+      "eyebrow": "Signature Name",
+      "kicker": "Your signature is",
       "lead": "A name that captures the mood you carry.",
       "cta": "Reveal my archetype"
     },

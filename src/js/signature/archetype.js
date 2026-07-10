@@ -1,16 +1,16 @@
 /**
  * Archetype picker — chooses the archetype whose axis-weight vector best
- * matches the user's Fragrance DNA (cosine similarity over the 9 axes).
+ * matches the user's Scent Signature (cosine similarity over the 9 axes).
  * Deterministic; pure function.
  */
 import { ARCHETYPES } from "../data/archetypes.js";
-import { DNA_AXES } from "./dna.js";
+import { SIGNATURE_AXES } from "./scentSignature.js";
 
 function cosine(a, b) {
   let dot = 0;
   let na = 0;
   let nb = 0;
-  DNA_AXES.forEach((ax) => {
+  SIGNATURE_AXES.forEach((ax) => {
     const x = a[ax] ?? 0;
     const y = b[ax] ?? 0;
     dot += x * y;
@@ -21,10 +21,10 @@ function cosine(a, b) {
   return dot / (Math.sqrt(na) * Math.sqrt(nb));
 }
 
-/** dna ({axis:0..100}) → the best-matching archetype record. */
-export function pickArchetype(dna) {
+/** signature ({axis:0..100}) → the best-matching archetype record. */
+export function pickArchetype(signature) {
   const v = {};
-  DNA_AXES.forEach((ax) => (v[ax] = (dna[ax] ?? 0) / 100)); // 0..1
+  SIGNATURE_AXES.forEach((ax) => (v[ax] = (signature[ax] ?? 0) / 100)); // 0..1
   let best = ARCHETYPES[0];
   let bestScore = -Infinity;
   ARCHETYPES.forEach((arch) => {

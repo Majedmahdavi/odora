@@ -88,8 +88,8 @@ export function chatIcon(className = "") {
   </svg>`;
 }
 
-/** DNA double helix — fragrance profile. */
-export function dnaIcon(className = "") {
+/** Double-helix mark — used for the Scent Signature step. */
+export function helixIcon(className = "") {
   return `
   <svg class="${className}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M7 3c0 4.5 10 5.5 10 9s-10 4.5-10 9"/>

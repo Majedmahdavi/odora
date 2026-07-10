@@ -7,7 +7,7 @@ import { toFaDigits } from "../utils/format.js";
 import { buildShareLink, decodeState } from "../utils/share.js";
 import { toast } from "../ui/toast.js";
 import { applyTheme } from "../ui/theme.js";
-import { buildDna, topAxes } from "../discovery/dna.js";
+import { buildScentSignature, topAxes } from "../signature/scentSignature.js";
 
 /**
  * صفحه‌ی نتایج (Step 6)
@@ -35,29 +35,29 @@ export async function renderResults(view, params = {}) {
   view.innerHTML = `<section class="container results"><div class="results-loading">${t("results.loading")}</div></section>`;
 
   const { top, profile } = await recommend(sourceState);
-  const dna = buildDna(profile);
-  view.innerHTML = buildHtml(top, shared, dna);
+  const signature = buildScentSignature(profile);
+  view.innerHTML = buildHtml(top, shared, signature);
   wireActions(view, sourceState, shared);
 }
 
 /* ---------- markup ---------- */
-function quickSummary(dna) {
+function quickSummary(signature) {
   const sep = getLang() === "fa" ? "، " : ", ";
-  const axes = topAxes(dna, 3).map((ax) => t(`discovery.axes.${ax}`)).join(sep);
-  return `<p class="results-quick">${t("discovery.quick.summary").replace("{axes}", axes)}</p>`;
+  const axes = topAxes(signature, 3).map((ax) => t(`signature.axes.${ax}`)).join(sep);
+  return `<p class="results-quick">${t("signature.quick.summary").replace("{axes}", axes)}</p>`;
 }
 
-function discoveryTeaser() {
+function signatureTeaser() {
   return `
     <section class="dsc-teaser">
-      <span class="dsc-eyebrow">${t("discovery.teaser.eyebrow")}</span>
-      <h2 class="dsc-teaser-title">${t("discovery.teaser.title")}</h2>
-      <p class="dsc-teaser-text">${t("discovery.teaser.text")}</p>
-      <a class="btn btn-primary btn-lg" href="#/discovery">${t("discovery.teaser.cta")}</a>
+      <span class="dsc-eyebrow">${t("signature.teaser.eyebrow")}</span>
+      <h2 class="dsc-teaser-title">${t("signature.teaser.title")}</h2>
+      <p class="dsc-teaser-text">${t("signature.teaser.text")}</p>
+      <a class="btn btn-primary btn-lg" href="#/signature">${t("signature.teaser.cta")}</a>
     </section>`;
 }
 
-function buildHtml(top, shared, dna) {
+function buildHtml(top, shared, signature) {
   if (!top.length) {
     return `
       <section class="container page">
@@ -74,14 +74,14 @@ function buildHtml(top, shared, dna) {
       <div class="section-head">
         <h1 class="section-title">${t("results.title")}</h1>
         <p>${t("results.subtitle")}</p>
-        ${quickSummary(dna)}
+        ${quickSummary(signature)}
       </div>
 
       ${heroCard(top[0])}
 
       <div class="results-list">${rows}</div>
 
-      ${shared ? "" : discoveryTeaser()}
+      ${shared ? "" : signatureTeaser()}
 
       <div class="results-actions">
         <button class="btn btn-primary" id="shareBtn" type="button">${t("results.share")}</button>

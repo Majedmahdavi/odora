@@ -38,7 +38,7 @@ export function buildReport(top, limit = 3) {
       strengths,                 // family ids → families.<id>.name
       occasion: pf.occasion || [],
       season: pf.season,         // → quiz.questions.season.options.<v> (or "all")
-      timeOfDay: timeOfDay(pf),  // day | evening | versatile → discovery.report.time.<v>
+      timeOfDay: timeOfDay(pf),  // day | evening | versatile → signature.report.time.<v>
       reasonFamily: dominant,    // family id → templated into the reason line
     };
   });
