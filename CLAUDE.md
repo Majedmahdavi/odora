@@ -13,6 +13,7 @@ user asks for. Run it with `python serve.py` → http://localhost:5500 to see th
 - **The user communicates in Persian.** Reply in Persian.
 - **Step-by-step delivery:** build one step at a time, show the result with a short explanation, and WAIT for the user's approval before moving to the next step.
 - When the user requests changes, change ONLY what was asked — do not touch other parts.
+- **Follow the Odora Design Language ([ODL.md](ODL.md)) for all copy and naming.** One official name per concept (see the glossary); the crown concept is **"Scent Signature" / «امضای رایحه»**, used sparingly for meaningful reveal moments — natural human language elsewhere. Never use DNA/genome/genetic terminology. Tone: elegant, calm, warm, premium — never scientific or technical. Before adding a term, reuse an existing official one; record any new one in ODL.md.
 
 ## Stack & run
 
