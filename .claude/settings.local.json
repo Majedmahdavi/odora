@@ -37,7 +37,27 @@
       "Bash(printf '{\\\\n  \"siteBase\": \"http://84.32.10.66/\",\\\\n  \"smtp\": {\\\\n    \"host\": \"\",\\\\n    \"port\": 587,\\\\n    \"user\": \"\",\\\\n    \"password\": \"\",\\\\n    \"from\": \"\",\\\\n    \"tls\": true\\\\n  }\\\\n}\\\\n')",
       "Bash(timeout 60 \"/c/Program Files/PuTTY/plink.exe\" -batch -ssh -P 9011 -hostkey \"SHA256:b3vXN/w4PoWTpv4QiOGf3fYzNEzo6GfanGkPd3uFgNw\" -pwfile vps_pw.txt root@84.32.10.66 \"test -f /opt/odora-api/config.json && echo exists || cat > /opt/odora-api/config.json\")",
       "Bash(timeout 60 \"/c/Program Files/PuTTY/plink.exe\" -batch -ssh -P 9011 -hostkey \"SHA256:b3vXN/w4PoWTpv4QiOGf3fYzNEzo6GfanGkPd3uFgNw\" -pwfile vps_pw.txt root@84.32.10.66 \"chown www-data:www-data /opt/odora-api/config.json 2>/dev/null; ls -la /opt/odora-api/ | tail -4 && curl -s http://localhost/api/health\")",
-      "Bash(timeout 90 \"/c/Program Files/PuTTY/plink.exe\" -batch -ssh -P 9011 -hostkey \"SHA256:b3vXN/w4PoWTpv4QiOGf3fYzNEzo6GfanGkPd3uFgNw\" -pwfile vps_pw.txt root@84.32.10.66 \"cd /var/www/odora && git pull 2>&1 | tail -1 && git log --oneline -1 && systemctl is-active odora-api nginx\")"
+      "Bash(timeout 90 \"/c/Program Files/PuTTY/plink.exe\" -batch -ssh -P 9011 -hostkey \"SHA256:b3vXN/w4PoWTpv4QiOGf3fYzNEzo6GfanGkPd3uFgNw\" -pwfile vps_pw.txt root@84.32.10.66 \"cd /var/www/odora && git pull 2>&1 | tail -1 && git log --oneline -1 && systemctl is-active odora-api nginx\")",
+      "Bash(git clone *)",
+      "Bash(git -C \"/c/Users/PCMOD/Desktop/test fork\" checkout -b test)",
+      "Bash(git -C \"/c/Users/PCMOD/Desktop/test fork\" branch --show-current)",
+      "Bash(git -C \"/c/Users/PCMOD/Desktop/test fork\" log --oneline -1)",
+      "Read(//c/Users/PCMOD/Desktop/test fork/**)",
+      "Bash(python serve.py)",
+      "Bash(curl -s -o /dev/null -w \"fork server on 5500: %{http_code}\\\\n\" http://localhost:5500/)",
+      "Bash(curl -s http://localhost:5500/src/js/pages/home.js)",
+      "PowerShell(Stop-Process -Id 18464 -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(\"port 5500 freed\")",
+      "PowerShell($c = Get-NetTCPConnection -LocalPort 5500 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { Stop-Process -Id $c.OwningProcess -Force -ErrorAction SilentlyContinue; \"freed 5500\" } else { \"5500 already free\" })",
+      "Bash(python \"/c/Users/PCMOD/AppData/Local/Temp/claude/C--Users-PCMOD-Desktop-perfume-test1/fd4805a1-49b4-44e0-8361-4afc833cbf87/scratchpad/serve_fork.py\")",
+      "Bash(curl -s -o /dev/null -w \"fork preview 5599: %{http_code}\\\\n\" http://localhost:5599/)",
+      "Bash(curl -s \"http://localhost:5599/src/js/i18n/locales/en.json\")",
+      "Bash(curl -s -o /dev/null -w \"5599: %{http_code}\\\\n\" http://localhost:5599/)",
+      "PowerShell(Set-Location \"$env:USERPROFILE\\\\Desktop\\\\perfume_test1\"; git log --reverse --pretty=format:\"%ad | %s\" --date=short)",
+      "Bash(python \"/c/Users/PCMOD/AppData/Local/Temp/claude/C--Users-PCMOD-Desktop-perfume-test1/fd4805a1-49b4-44e0-8361-4afc833cbf87/scratchpad/check_keys.py\")",
+      "Bash(curl -s -o /dev/null -w \"5599: %{http_code}\\\\n\" --max-time 3 http://localhost:5599/)",
+      "Bash(curl -s \"http://localhost:5599/src/js/pages/signature.js\")",
+      "Bash(python -m http.server 8777)"
     ]
   }
 }

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://majedmahdavi.github.io/odora/sitemap.xml
+Sitemap: https://odoraperfume.ir/sitemap.xml
