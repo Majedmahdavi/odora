@@ -976,3 +976,8 @@ html[lang="en"] body { font-family: "Poppins", "Vazirmatn", system-ui, -apple-sy
 
 /* ROBO Stage 1: interpretability line on the top result */
 .match-why { color: var(--text-muted); font-size: 0.9rem; margin-top: -0.1rem; max-width: 34ch; }
+
+/* ROBO Stage 1.5: live-weather control on results */
+.weather-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin: 0.4rem 0 1.4rem; }
+.weather-label { color: var(--text-muted); font-size: 0.9rem; }
+.weather-status { font-size: 0.85rem; }

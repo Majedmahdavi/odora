@@ -71,7 +71,8 @@ export const scentMatrixMatcher = {
   id: "scentmatrix",
 
   match(profile, perfumes) {
-    const tempC = tempFromSeason(profile.season);
+    // real weather (profile.tempC, ROBO Stage 1.5) when available, else season
+    const tempC = profile.tempC != null ? profile.tempC : tempFromSeason(profile.season);
 
     const scored = perfumes
       .filter((pf) => genderEligible(profile.gender, pf.gender))

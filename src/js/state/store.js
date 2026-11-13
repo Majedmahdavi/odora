@@ -17,6 +17,8 @@ const defaultState = {
   user: null, // server account { token, name, email, since } — set by pages/account.js
   giftMode: null, // surprise gift test { id, n: sender name } — set by #/gtest
   myGifts: [], // pre-account gift links { id, secret, createdAt } (legacy, still readable)
+  weatherCity: null, // chosen city id for live-weather ranking (ROBO Stage 1.5)
+  weatherTempC: null, // last fetched real temperature °C (null → fall back to season)
 };
 
 function load() {

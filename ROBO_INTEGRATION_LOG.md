@@ -115,7 +115,38 @@ driving the match + a weather clause when the perfume genuinely suits the season
 - Revert the brain without deleting anything: in `app.js` change
   `setMatcher("scentmatrix")` → `setMatcher("local")`.
 
-### Next stages (not done — future)
-- Stage 1.5: real weather by city (replace season→temperature with a live lookup).
+---
+
+## Stage 1.5 — Live weather (done)
+
+Replaces the season→temperature bridge with the **real current temperature**, so
+recommendations react to today's weather, not just the quiz season.
+
+- `src/js/utils/weather.js`: Open-Meteo (free, keyless, CORS-friendly — the same
+  source ROBO used) `current.temperature_2m`; 10 Iranian cities with coords +
+  bilingual labels; `fetchTempByCity()` resolves to `null` on any failure.
+- `state/store.js`: `weatherCity` + `weatherTempC` (persisted).
+- `matching/index.js`: `recommend(state, { tempC })` injects `profile.tempC`;
+  `scentMatrixMatcher` uses it when present, else falls back to the season.
+- `results.js`: a compact weather control — pick a city → fetch live temp →
+  re-rank; "By season" clears it back to the season default; network failure
+  keeps the season ranking and toasts. fa/en keys `results.weather*`, one
+  `.weather-bar` CSS rule. Shown only on the user's own results (not shared links).
+
+**Verified (live API + mirror):** real temps fetched now — Tehran 11.5°C,
+Bandar Abbas 27.0°C. At cool Tehran the heavy perfume's tempFit (0.73) beats the
+fresh one (0.21); at warm Bandar Abbas the fresh perfume (0.53) beats the heavy
+(0.37). Live weather re-ranks sensibly. JSON valid; 205 i18n keys resolve in both
+locales. (Live browser screenshot still pending — preview tool unavailable.)
+
+Files: added `src/js/utils/weather.js`; changed `state/store.js`,
+`matching/index.js`, `matching/scentMatrixMatcher.js`, `pages/results.js`,
+`i18n/locales/{fa,en}.json`, `assets/css/styles.css`.
+
+---
+
+## Next stages (not done — future)
+- Stage 1.6: browser geolocation (auto-detect the city) + cache the temperature
+  with a short TTL so it isn't refetched on every render.
 - Stage 2: expand catalog from ROBO's 40k; richer per-perfume "why".
 - Stage 3 (needs human-study data): cross-modal inference, trauma/hormone layer.

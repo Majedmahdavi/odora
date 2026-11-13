@@ -28,8 +28,9 @@ export function getMatcherId() {
  * @param {object} [opts] { limit = 5, perfumes = PERFUMES }
  * @returns {Promise<{ profile, matcherId, top, all }>}
  */
-export async function recommend(state, { limit = 5, perfumes = PERFUMES } = {}) {
+export async function recommend(state, { limit = 5, perfumes = PERFUMES, tempC = null } = {}) {
   const profile = buildProfile(state);
+  if (tempC != null) profile.tempC = tempC; // real weather overrides the season bridge
   const matcher = MATCHERS[activeId];
   const results = await matcher.match(profile, perfumes);
   return {

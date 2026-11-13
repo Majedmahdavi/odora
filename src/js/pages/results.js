@@ -8,6 +8,7 @@ import { buildShareLink, decodeState } from "../utils/share.js";
 import { toast } from "../ui/toast.js";
 import { applyTheme } from "../ui/theme.js";
 import { buildScentSignature, topAxes } from "../signature/scentSignature.js";
+import { CITIES, fetchTempByCity } from "../utils/weather.js";
 
 /**
  * صفحه‌ی نتایج (Step 6)
@@ -34,10 +35,13 @@ export async function renderResults(view, params = {}) {
 
   view.innerHTML = `<section class="container results"><div class="results-loading">${t("results.loading")}</div></section>`;
 
-  const { top, profile } = await recommend(sourceState);
+  // ROBO Stage 1.5: rank by real weather when a city is chosen, else by season
+  const tempC = shared ? null : getState().weatherTempC;
+  const { top, profile } = await recommend(sourceState, { tempC });
   const signature = buildScentSignature(profile);
   view.innerHTML = buildHtml(top, shared, signature);
   wireActions(view, sourceState, shared);
+  if (!shared) wireWeather(view, params);
 }
 
 /* ---------- markup ---------- */
@@ -55,6 +59,49 @@ function signatureTeaser() {
       <p class="dsc-teaser-text">${t("signature.teaser.text")}</p>
       <a class="btn btn-primary btn-lg" href="#/signature">${t("signature.teaser.cta")}</a>
     </section>`;
+}
+
+/** Live-weather control (ROBO Stage 1.5): pick a city → real temperature re-ranks. */
+function weatherBar() {
+  const { weatherCity, weatherTempC } = getState();
+  const fa = getLang() === "fa";
+  const opts = CITIES.map(
+    (c) => `<option value="${c.id}" ${c.id === weatherCity ? "selected" : ""}>${fa ? c.fa : c.en}</option>`
+  ).join("");
+  const status =
+    weatherCity && weatherTempC != null
+      ? `${t("results.weatherNow")} ${toFaDigits(Math.round(weatherTempC))}°C`
+      : t("results.weatherSeasonNote");
+  return `
+    <div class="weather-bar">
+      <span class="weather-label">${t("results.weatherLabel")}</span>
+      <select id="weatherCity" class="filter-select" aria-label="${t("results.weatherLabel")}">
+        <option value="">${t("results.weatherSeason")}</option>
+        ${opts}
+      </select>
+      <span class="weather-status muted">${status}</span>
+    </div>`;
+}
+
+function wireWeather(view, params) {
+  const sel = view.querySelector("#weatherCity");
+  if (!sel) return;
+  sel.addEventListener("change", async () => {
+    const id = sel.value;
+    if (!id) {
+      setState({ weatherCity: null, weatherTempC: null });
+      return renderResults(view, params); // back to season-based ranking
+    }
+    sel.disabled = true;
+    const temp = await fetchTempByCity(id);
+    if (temp == null) {
+      sel.disabled = false;
+      toast(t("results.weatherError")); // network failed → keep season ranking
+      return;
+    }
+    setState({ weatherCity: id, weatherTempC: temp });
+    renderResults(view, params); // re-rank with the real temperature
+  });
 }
 
 function buildHtml(top, shared, signature) {
@@ -76,6 +123,8 @@ function buildHtml(top, shared, signature) {
         <p>${t("results.subtitle")}</p>
         ${quickSummary(signature)}
       </div>
+
+      ${shared ? "" : weatherBar()}
 
       ${heroCard(top[0])}
 
