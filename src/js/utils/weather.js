@@ -48,3 +48,35 @@ export async function fetchTempByCity(cityId) {
   if (!city) return null;
   return fetchTempByCoords(city.lat, city.lon);
 }
+
+/* --- Stage 1.6: geolocation + freshness cache ---------------------------- */
+
+/** How long a fetched temperature stays "fresh" before a background refresh. */
+export const WEATHER_TTL_MS = 30 * 60 * 1000; // 30 min
+
+export function isFreshWeather(ts) {
+  return typeof ts === "number" && Date.now() - ts < WEATHER_TTL_MS;
+}
+
+/** Browser geolocation → {lat, lon} or null (denied / unavailable / timeout). */
+export function getGeoCoords(timeoutMs = 8000) {
+  return new Promise((resolve) => {
+    if (!navigator.geolocation) return resolve(null);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+      () => resolve(null),
+      { timeout: timeoutMs, maximumAge: 5 * 60 * 1000 }
+    );
+  });
+}
+
+/** Nearest known city to coordinates (for a friendly label). */
+export function nearestCity(lat, lon) {
+  let best = CITIES[0];
+  let bd = Infinity;
+  for (const c of CITIES) {
+    const d = (c.lat - lat) ** 2 + (c.lon - lon) ** 2;
+    if (d < bd) { bd = d; best = c; }
+  }
+  return best;
+}

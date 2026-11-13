@@ -145,8 +145,36 @@ Files: added `src/js/utils/weather.js`; changed `state/store.js`,
 
 ---
 
+---
+
+## Stage 1.6 — Geolocation + freshness cache (done)
+
+Makes the live-weather ranking effortless and self-maintaining.
+
+- `utils/weather.js`: `getGeoCoords()` (browser geolocation, resolves `null` on
+  deny/timeout/unsupported — never throws), `nearestCity(lat, lon)` for a
+  friendly label, `WEATHER_TTL_MS = 30 min` + `isFreshWeather(ts)`.
+- `state/store.js`: `weatherSource` ("city" | "geo"), `weatherCoords`, `weatherAt`.
+- `results.js`:
+  - the picker gained a **📍 My location** option; choosing it asks the browser
+    for coordinates, fetches the temperature for those exact coordinates (more
+    accurate than a city centroid) and labels it "📍 near {nearest city} · N°C";
+  - `maybeRefreshWeather()` — on render, if a location is set but its cached
+    temperature is older than the TTL, it refreshes in the background by
+    coordinates and re-renders **only if the value actually changed** (no render
+    loop: the refreshed timestamp makes the next pass fresh);
+  - every failure path is safe: denied location → toast + stay on season;
+    failed fetch → keep the previous value silently.
+- fa/en keys `results.weatherGeo / weatherGeoError / weatherNear`.
+
+**Verified:** JSON valid; 208 i18n keys resolve in both locales; all
+`weather.js` exports present; `nearestCity` correct on 5 coordinate spot-checks
+(downtown Tehran→tehran, Shiraz airport→shiraz, Karaj→karaj, Qeshm→bandar-abbas,
+Gilan coast→rasht); TTL boundary correct (29 min fresh, 31 min stale).
+(Geolocation itself needs a real browser prompt — not exercisable this session.)
+
+---
+
 ## Next stages (not done — future)
-- Stage 1.6: browser geolocation (auto-detect the city) + cache the temperature
-  with a short TTL so it isn't refetched on every render.
 - Stage 2: expand catalog from ROBO's 40k; richer per-perfume "why".
 - Stage 3 (needs human-study data): cross-modal inference, trauma/hormone layer.

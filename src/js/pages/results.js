@@ -8,7 +8,10 @@ import { buildShareLink, decodeState } from "../utils/share.js";
 import { toast } from "../ui/toast.js";
 import { applyTheme } from "../ui/theme.js";
 import { buildScentSignature, topAxes } from "../signature/scentSignature.js";
-import { CITIES, fetchTempByCity } from "../utils/weather.js";
+import {
+  CITIES, getCity, fetchTempByCity, fetchTempByCoords,
+  getGeoCoords, nearestCity, isFreshWeather,
+} from "../utils/weather.js";
 
 /**
  * صفحه‌ی نتایج (Step 6)
@@ -41,7 +44,10 @@ export async function renderResults(view, params = {}) {
   const signature = buildScentSignature(profile);
   view.innerHTML = buildHtml(top, shared, signature);
   wireActions(view, sourceState, shared);
-  if (!shared) wireWeather(view, params);
+  if (!shared) {
+    wireWeather(view, params);
+    maybeRefreshWeather(view, params); // Stage 1.6: refresh a stale cached temp
+  }
 }
 
 /* ---------- markup ---------- */
@@ -61,47 +67,80 @@ function signatureTeaser() {
     </section>`;
 }
 
-/** Live-weather control (ROBO Stage 1.5): pick a city → real temperature re-ranks. */
+/**
+ * Live-weather control (ROBO Stage 1.5 + 1.6): "My location" (browser
+ * geolocation) or a city → real temperature re-ranks. Season is the default.
+ */
 function weatherBar() {
-  const { weatherCity, weatherTempC } = getState();
+  const { weatherCity, weatherTempC, weatherSource } = getState();
   const fa = getLang() === "fa";
-  const opts = CITIES.map(
-    (c) => `<option value="${c.id}" ${c.id === weatherCity ? "selected" : ""}>${fa ? c.fa : c.en}</option>`
+  const cityOpts = CITIES.map(
+    (c) => `<option value="${c.id}" ${weatherSource === "city" && c.id === weatherCity ? "selected" : ""}>${fa ? c.fa : c.en}</option>`
   ).join("");
-  const status =
-    weatherCity && weatherTempC != null
-      ? `${t("results.weatherNow")} ${toFaDigits(Math.round(weatherTempC))}°C`
-      : t("results.weatherSeasonNote");
+
+  let status = t("results.weatherSeasonNote");
+  if (weatherTempC != null && weatherSource) {
+    const temp = `${toFaDigits(Math.round(weatherTempC))}°C`;
+    if (weatherSource === "geo") {
+      const near = weatherCity ? (fa ? getCity(weatherCity)?.fa : getCity(weatherCity)?.en) : "";
+      status = `📍 ${near ? `${t("results.weatherNear")} ${near} · ` : ""}${temp}`;
+    } else {
+      status = `${t("results.weatherNow")} ${temp}`;
+    }
+  }
+
   return `
     <div class="weather-bar">
       <span class="weather-label">${t("results.weatherLabel")}</span>
       <select id="weatherCity" class="filter-select" aria-label="${t("results.weatherLabel")}">
         <option value="">${t("results.weatherSeason")}</option>
-        ${opts}
+        <option value="geo" ${weatherSource === "geo" ? "selected" : ""}>📍 ${t("results.weatherGeo")}</option>
+        ${cityOpts}
       </select>
       <span class="weather-status muted">${status}</span>
     </div>`;
+}
+
+function clearWeather() {
+  setState({ weatherCity: null, weatherTempC: null, weatherSource: null, weatherCoords: null, weatherAt: null });
 }
 
 function wireWeather(view, params) {
   const sel = view.querySelector("#weatherCity");
   if (!sel) return;
   sel.addEventListener("change", async () => {
-    const id = sel.value;
-    if (!id) {
-      setState({ weatherCity: null, weatherTempC: null });
-      return renderResults(view, params); // back to season-based ranking
-    }
+    const val = sel.value;
+    if (!val) { clearWeather(); return renderResults(view, params); } // back to season
     sel.disabled = true;
-    const temp = await fetchTempByCity(id);
-    if (temp == null) {
-      sel.disabled = false;
-      toast(t("results.weatherError")); // network failed → keep season ranking
-      return;
+
+    if (val === "geo") {
+      const coords = await getGeoCoords();
+      if (!coords) { sel.disabled = false; toast(t("results.weatherGeoError")); return; }
+      const temp = await fetchTempByCoords(coords.lat, coords.lon);
+      if (temp == null) { sel.disabled = false; toast(t("results.weatherError")); return; }
+      const near = nearestCity(coords.lat, coords.lon);
+      setState({ weatherSource: "geo", weatherCity: near.id, weatherCoords: coords, weatherTempC: temp, weatherAt: Date.now() });
+      return renderResults(view, params);
     }
-    setState({ weatherCity: id, weatherTempC: temp });
+
+    const city = getCity(val);
+    const temp = await fetchTempByCity(val);
+    if (temp == null) { sel.disabled = false; toast(t("results.weatherError")); return; }
+    setState({ weatherSource: "city", weatherCity: val, weatherCoords: { lat: city.lat, lon: city.lon }, weatherTempC: temp, weatherAt: Date.now() });
     renderResults(view, params); // re-rank with the real temperature
   });
+}
+
+/** Stage 1.6: if a location is set but its temperature is stale, refresh it in
+ *  the background (by coords) and re-render only if the value changed. */
+async function maybeRefreshWeather(view, params) {
+  const s = getState();
+  if (!s.weatherCoords || isFreshWeather(s.weatherAt)) return;
+  const temp = await fetchTempByCoords(s.weatherCoords.lat, s.weatherCoords.lon);
+  if (temp == null) return; // keep the stale value silently
+  if (temp === s.weatherTempC) { setState({ weatherAt: Date.now() }); return; }
+  setState({ weatherTempC: temp, weatherAt: Date.now() });
+  renderResults(view, params);
 }
 
 function buildHtml(top, shared, signature) {

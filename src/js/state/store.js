@@ -19,6 +19,9 @@ const defaultState = {
   myGifts: [], // pre-account gift links { id, secret, createdAt } (legacy, still readable)
   weatherCity: null, // chosen city id for live-weather ranking (ROBO Stage 1.5)
   weatherTempC: null, // last fetched real temperature °C (null → fall back to season)
+  weatherSource: null, // "city" | "geo" — how the location was set (Stage 1.6)
+  weatherCoords: null, // { lat, lon } used for background refresh
+  weatherAt: null, // timestamp of the last fetch (TTL freshness)
 };
 
 function load() {
