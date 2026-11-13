@@ -12,6 +12,7 @@ import {
   CITIES, getCity, fetchTempByCity, fetchTempByCoords,
   getGeoCoords, nearestCity, isFreshWeather,
 } from "../utils/weather.js";
+import { estimateWearHours } from "../matching/notePhysics.js";
 
 /**
  * صفحه‌ی نتایج (Step 6)
@@ -214,7 +215,13 @@ function whyLine(item) {
   let clause = "";
   if (b.temp >= 0.55 && b.tempC <= 15) clause = ` ${t("results.tempCold")}`;
   else if (b.temp >= 0.55 && b.tempC >= 25) clause = ` ${t("results.tempWarm")}`;
-  return `<p class="match-why">${t("results.whyLabel")} ${fams}${clause}</p>`;
+
+  // Stage 2: estimated wear time at the same temperature (ROBO wear anchors)
+  const hours = estimateWearHours(item.perfume.families, b.tempC ?? 20);
+  const wear = hours
+    ? ` · ${t("results.wearAbout")} ${toFaDigits(Math.round(hours))} ${t("results.wearHours")}`
+    : "";
+  return `<p class="match-why">${t("results.whyLabel")} ${fams}${clause}${wear}</p>`;
 }
 
 function resultRow(item, rank) {

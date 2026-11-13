@@ -52,29 +52,62 @@
       "eyebrow": "Why Odora",
       "title": "It starts with understanding you",
       "cards": [
-        { "title": "Fragrance Personality", "text": "Discover what types of scents naturally fit your personality." },
-        { "title": "Smart Recommendations", "text": "Receive personalized perfume recommendations instead of browsing thousands of fragrances." },
-        { "title": "Gift Finder", "text": "Help someone else discover the perfect fragrance." }
+        {
+          "title": "Fragrance Personality",
+          "text": "Discover what types of scents naturally fit your personality."
+        },
+        {
+          "title": "Smart Recommendations",
+          "text": "Receive personalized perfume recommendations instead of browsing thousands of fragrances."
+        },
+        {
+          "title": "Gift Finder",
+          "text": "Help someone else discover the perfect fragrance."
+        }
       ]
     },
     "how": {
       "eyebrow": "How it works",
       "title": "Three steps to your scent identity",
       "steps": [
-        { "title": "Answer a few questions", "text": "A few carefully designed questions about moods, moments and preferences." },
-        { "title": "Odora builds your Fragrance Profile", "text": "Your answers become a unique numeric profile of scent families." },
-        { "title": "Receive personalized recommendations", "text": "Fragrances matched to your profile — each with a clear explanation." }
+        {
+          "title": "Answer a few questions",
+          "text": "A few carefully designed questions about moods, moments and preferences."
+        },
+        {
+          "title": "Odora builds your Fragrance Profile",
+          "text": "Your answers become a unique numeric profile of scent families."
+        },
+        {
+          "title": "Receive personalized recommendations",
+          "text": "Fragrances matched to your profile — each with a clear explanation."
+        }
       ]
     },
     "signature": {
       "eyebrow": "Scent Signature",
       "title": "Your taste, translated into a Scent Signature",
       "axes": [
-        { "label": "Freshness", "value": 90 },
-        { "label": "Woody", "value": 80 },
-        { "label": "Green", "value": 70 },
-        { "label": "Amber", "value": 50 },
-        { "label": "Sweet", "value": 20 }
+        {
+          "label": "Freshness",
+          "value": 90
+        },
+        {
+          "label": "Woody",
+          "value": 80
+        },
+        {
+          "label": "Green",
+          "value": 70
+        },
+        {
+          "label": "Amber",
+          "value": 50
+        },
+        {
+          "label": "Sweet",
+          "value": 20
+        }
       ],
       "caption": "Your Scent Signature is a unique scent profile built from your preferences. Every recommendation is based on it.",
       "cta": "Discover Mine"
@@ -86,7 +119,12 @@
       "name": "Bleu de Chanel",
       "compatLabel": "Compatibility",
       "whyTitle": "Why it matches",
-      "reasons": ["Fresh", "Woody", "Elegant", "Office Friendly"],
+      "reasons": [
+        "Fresh",
+        "Woody",
+        "Elegant",
+        "Office Friendly"
+      ],
       "note": "Recommendations are different for every user."
     },
     "gift": {
@@ -102,10 +140,19 @@
   "signature": {
     "back": "Back",
     "axes": {
-      "fresh": "Fresh", "woody": "Woody", "amber": "Amber", "floral": "Floral",
-      "green": "Green", "marine": "Marine", "leather": "Leather", "sweet": "Sweet", "gourmand": "Gourmand"
+      "fresh": "Fresh",
+      "woody": "Woody",
+      "amber": "Amber",
+      "floral": "Floral",
+      "green": "Green",
+      "marine": "Marine",
+      "leather": "Leather",
+      "sweet": "Sweet",
+      "gourmand": "Gourmand"
     },
-    "quick": { "summary": "You seem to lean toward {axes} fragrances." },
+    "quick": {
+      "summary": "You seem to lean toward {axes} fragrances."
+    },
     "teaser": {
       "eyebrow": "Optional discovery",
       "title": "Want to know WHY these fragrances fit you?",
@@ -163,14 +210,86 @@
       "cta": "See my recommendations"
     },
     "arch": {
-      "minimalist": { "name": "The Minimalist", "desc": "You value clarity and restraint — clean, quiet scents that feel effortless and refined.", "traits": ["Calm", "Refined", "Effortless"], "styles": "Fresh, green, clean musks" },
-      "explorer": { "name": "The Explorer", "desc": "You're curious and open — airy, expansive scents that feel like fresh horizons.", "traits": ["Curious", "Free", "Energetic"], "styles": "Marine, citrus, aromatic" },
-      "gentleman": { "name": "The Gentleman", "desc": "You carry quiet authority — warm woods and leather with timeless elegance.", "traits": ["Confident", "Classic", "Elegant"], "styles": "Woody, leather, amber" },
-      "dreamer": { "name": "The Dreamer", "desc": "You feel deeply — soft florals and gentle sweetness with a romantic soul.", "traits": ["Romantic", "Gentle", "Expressive"], "styles": "Floral, powdery, soft sweet" },
-      "adventurer": { "name": "The Adventurer", "desc": "You chase the next horizon — bold fresh-woody scents built for movement.", "traits": ["Bold", "Active", "Spontaneous"], "styles": "Aquatic, woody, aromatic" },
-      "creator": { "name": "The Creator", "desc": "You blend the unexpected — rich, layered scents with artistic depth.", "traits": ["Artistic", "Original", "Layered"], "styles": "Amber, woody-floral, gourmand" },
-      "collector": { "name": "The Collector", "desc": "You savor richness — deep amber, leather and gourmand with a luxurious presence.", "traits": ["Refined", "Indulgent", "Bold"], "styles": "Amber, leather, gourmand" },
-      "freeSpirit": { "name": "The Free Spirit", "desc": "You follow feeling — bright florals and fresh air with a light, joyful heart.", "traits": ["Joyful", "Light", "Warm"], "styles": "Floral, fresh, fruity" }
+      "minimalist": {
+        "name": "The Minimalist",
+        "desc": "You value clarity and restraint — clean, quiet scents that feel effortless and refined.",
+        "traits": [
+          "Calm",
+          "Refined",
+          "Effortless"
+        ],
+        "styles": "Fresh, green, clean musks"
+      },
+      "explorer": {
+        "name": "The Explorer",
+        "desc": "You're curious and open — airy, expansive scents that feel like fresh horizons.",
+        "traits": [
+          "Curious",
+          "Free",
+          "Energetic"
+        ],
+        "styles": "Marine, citrus, aromatic"
+      },
+      "gentleman": {
+        "name": "The Gentleman",
+        "desc": "You carry quiet authority — warm woods and leather with timeless elegance.",
+        "traits": [
+          "Confident",
+          "Classic",
+          "Elegant"
+        ],
+        "styles": "Woody, leather, amber"
+      },
+      "dreamer": {
+        "name": "The Dreamer",
+        "desc": "You feel deeply — soft florals and gentle sweetness with a romantic soul.",
+        "traits": [
+          "Romantic",
+          "Gentle",
+          "Expressive"
+        ],
+        "styles": "Floral, powdery, soft sweet"
+      },
+      "adventurer": {
+        "name": "The Adventurer",
+        "desc": "You chase the next horizon — bold fresh-woody scents built for movement.",
+        "traits": [
+          "Bold",
+          "Active",
+          "Spontaneous"
+        ],
+        "styles": "Aquatic, woody, aromatic"
+      },
+      "creator": {
+        "name": "The Creator",
+        "desc": "You blend the unexpected — rich, layered scents with artistic depth.",
+        "traits": [
+          "Artistic",
+          "Original",
+          "Layered"
+        ],
+        "styles": "Amber, woody-floral, gourmand"
+      },
+      "collector": {
+        "name": "The Collector",
+        "desc": "You savor richness — deep amber, leather and gourmand with a luxurious presence.",
+        "traits": [
+          "Refined",
+          "Indulgent",
+          "Bold"
+        ],
+        "styles": "Amber, leather, gourmand"
+      },
+      "freeSpirit": {
+        "name": "The Free Spirit",
+        "desc": "You follow feeling — bright florals and fresh air with a light, joyful heart.",
+        "traits": [
+          "Joyful",
+          "Light",
+          "Warm"
+        ],
+        "styles": "Floral, fresh, fruity"
+      }
     },
     "report": {
       "eyebrow": "Recommendation Report",
@@ -180,7 +299,11 @@
       "notes": "Notes",
       "strengths": "Strengths",
       "timeLabel": "Time of day",
-      "time": { "day": "Daytime", "evening": "Evening", "versatile": "Anytime" },
+      "time": {
+        "day": "Daytime",
+        "evening": "Evening",
+        "versatile": "Anytime"
+      },
       "reason": "Recommended because your profile has a strong {family} character.",
       "quickResults": "Back to quick results"
     }
@@ -191,9 +314,18 @@
     "p1": "Choosing a perfume among hundreds of options is overwhelming. We made it simple: with a few short questions about your mood and taste, we turn your scent preferences into a numeric profile and suggest the closest matches from dozens of famous perfumes.",
     "p2": "No ads and no sales bias — just a real match between your taste and each perfume's character.",
     "values": [
-      { "title": "Personalized", "text": "Suggestions are built from your own answers, not from bestseller lists." },
-      { "title": "Transparent", "text": "For every perfume you see how close it is to your taste — and why." },
-      { "title": "Simple & fast", "text": "Under two minutes, no sign-up." }
+      {
+        "title": "Personalized",
+        "text": "Suggestions are built from your own answers, not from bestseller lists."
+      },
+      {
+        "title": "Transparent",
+        "text": "For every perfume you see how close it is to your taste — and why."
+      },
+      {
+        "title": "Simple & fast",
+        "text": "Under two minutes, no sign-up."
+      }
     ]
   },
   "contact": {
@@ -213,9 +345,18 @@
     "title": "What style are you looking for?",
     "subtitle": "Your choice also tunes the site's colors to match your taste.",
     "options": {
-      "feminine": { "label": "Feminine", "desc": "Soft, floral, feminine scents" },
-      "masculine": { "label": "Masculine", "desc": "Warm, woody, masculine scents" },
-      "unisex": { "label": "Unisex", "desc": "For everyone, regardless of gender" }
+      "feminine": {
+        "label": "Feminine",
+        "desc": "Soft, floral, feminine scents"
+      },
+      "masculine": {
+        "label": "Masculine",
+        "desc": "Warm, woody, masculine scents"
+      },
+      "unisex": {
+        "label": "Unisex",
+        "desc": "For everyone, regardless of gender"
+      }
     },
     "continue": "Continue to the Test",
     "changeHint": "You can change your choice anytime"
@@ -250,15 +391,27 @@
       },
       "occasion": {
         "title": "Where will you wear it most?",
-        "options": { "daily": "Everyday", "work": "At work", "party": "Parties" }
+        "options": {
+          "daily": "Everyday",
+          "work": "At work",
+          "party": "Parties"
+        }
       },
       "season": {
         "title": "Which season is it for?",
-        "options": { "warm": "Spring & summer", "cold": "Fall & winter", "all": "All seasons" }
+        "options": {
+          "warm": "Spring & summer",
+          "cold": "Fall & winter",
+          "all": "All seasons"
+        }
       },
       "strength": {
         "title": "How strong do you like it?",
-        "options": { "light": "Light", "medium": "Moderate", "strong": "Strong" }
+        "options": {
+          "light": "Light",
+          "medium": "Moderate",
+          "strong": "Strong"
+        }
       }
     }
   },
@@ -392,13 +545,34 @@
     "brown-sugar": "Brown sugar"
   },
   "families": {
-    "woody": { "name": "Woody", "desc": "Warm and dry, like sandalwood and cedar" },
-    "citrus": { "name": "Citrus", "desc": "Fresh and lively, like lemon and bergamot" },
-    "floral": { "name": "Floral", "desc": "Soft and romantic, like rose and jasmine" },
-    "sweet": { "name": "Sweet", "desc": "Cozy and warm, like vanilla and caramel" },
-    "spicy": { "name": "Spicy", "desc": "Warm and passionate, like cinnamon and cardamom" },
-    "oud": { "name": "Oud / Musky", "desc": "Deep and luxurious, like oud and musk" },
-    "aquatic": { "name": "Aquatic", "desc": "Cool and clean, like sea breeze and rain" }
+    "woody": {
+      "name": "Woody",
+      "desc": "Warm and dry, like sandalwood and cedar"
+    },
+    "citrus": {
+      "name": "Citrus",
+      "desc": "Fresh and lively, like lemon and bergamot"
+    },
+    "floral": {
+      "name": "Floral",
+      "desc": "Soft and romantic, like rose and jasmine"
+    },
+    "sweet": {
+      "name": "Sweet",
+      "desc": "Cozy and warm, like vanilla and caramel"
+    },
+    "spicy": {
+      "name": "Spicy",
+      "desc": "Warm and passionate, like cinnamon and cardamom"
+    },
+    "oud": {
+      "name": "Oud / Musky",
+      "desc": "Deep and luxurious, like oud and musk"
+    },
+    "aquatic": {
+      "name": "Aquatic",
+      "desc": "Cool and clean, like sea breeze and rain"
+    }
   },
   "results": {
     "title": "Your Result",
@@ -424,7 +598,9 @@
     "retakeShared": "Take the test myself",
     "sharedNote": "This result was shared with you — you can take the test too.",
     "loading": "Preparing your result…",
-    "empty": "You haven't taken the test yet."
+    "empty": "You haven't taken the test yet.",
+    "wearAbout": "lasts about",
+    "wearHours": "h"
   },
   "catalog": {
     "title": "Perfume Collection",
@@ -457,7 +633,8 @@
     "giftName": "Your name (optional)",
     "giftMessage": "Your message (optional)",
     "giftCopy": "Copy gift link",
-    "giftCopied": "Gift link copied!"
+    "giftCopied": "Gift link copied!",
+    "wear": "Est. longevity"
   },
   "favorites": {
     "title": "My Favorites",

@@ -5,11 +5,23 @@ import { FAMILIES } from "../data/families.js";
 import { bottleIcon, heartIcon, giftIcon } from "../ui/icons.js";
 import { perfumeCard, wireFavButtons } from "../ui/perfumeCard.js";
 import { similarTo } from "../matching/index.js";
+import { estimateWearHours } from "../matching/notePhysics.js";
 import { getState, isFavorite, toggleFavorite } from "../state/store.js";
 import { toFaDigits } from "../utils/format.js";
 import { navigate } from "../router.js";
 import { applyTheme } from "../ui/theme.js";
 import { toast } from "../ui/toast.js";
+
+/**
+ * Estimated wear time chip (ROBO Stage 2): hours on skin from the perfume's
+ * note-class mix, at the user's current weather temperature when known.
+ */
+function wearChip(pf) {
+  const tempC = getState().weatherTempC ?? 20;
+  const hours = estimateWearHours(pf.families, tempC);
+  if (!hours) return "";
+  return `<span class="meta-chip"><b>${t("perfume.wear")}:</b> ~${toFaDigits(Math.round(hours))} ${t("results.wearHours")}</span>`;
+}
 
 /**
  * جزئیات عطر (Step 7)
@@ -69,6 +81,7 @@ export function renderPerfume(view, params) {
             <span class="meta-chip"><b>${t("perfume.season")}:</b> ${season}</span>
             <span class="meta-chip"><b>${t("perfume.occasion")}:</b> ${occasion}</span>
             <span class="meta-chip"><b>${t("perfume.strength")}:</b> ${strength}</span>
+            ${wearChip(pf)}
           </div>
 
           <div class="pd-actions">

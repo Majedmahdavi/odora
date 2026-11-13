@@ -175,6 +175,60 @@ Gilan coast→rasht); TTL boundary correct (29 min fresh, 31 min stale).
 
 ---
 
+---
+
+## Stage 2 — Catalog expansion: **investigated and rejected** (with data)
+
+The plan was to import perfumes from ROBO's 39,987-row matrix A. Before writing
+any import code the source data was audited — and it does not meet Odora's
+requirements:
+
+| Field Odora needs | Availability in ROBO's catalog (58,825 rows) |
+|---|---|
+| **gender** (strict filter is a core product rule) | **0.0 % filled** — absent from `ds_a1_catalog.csv` *and* from the original Parfumo scrape (`raw/parfumo_data_clean.csv` has no gender-like column at all) |
+| Persian name / description | 0.0 % |
+| price / commercial | 0.0 % |
+| rating | 50.5 % |
+| note pyramid (top/middle/base) | present in the raw scrape ✅ |
+| 24-accord vector | 100 % of 39,987 rows, avg 4.8 of 24 accords each ✅ |
+
+**Could gender be inferred from the accords?** Tested properly instead of
+assumed: Odora's own 100 perfumes have known genders, so they are a labelled
+validation set. 39 of them were matched into ROBO's catalog by name, an
+accord-based heuristic (floral/powdery/creamy → feminine, woody/leathery/
+smoky/fougère → masculine) was tuned over four thresholds, and the best result
+was **44 % accuracy — barely above the 33 % random baseline for three classes**.
+The confusion matrix was disqualifying: 5 masculine perfumes labelled feminine,
+5 unisex labelled feminine, 4 unisex labelled masculine.
+
+**Decision: do not import.** Injecting guessed genders would silently break the
+"each section shows only its own gender" promise, and the imported records would
+have no Persian text — both at odds with the product and the ODL. The 40k
+catalog stays available for a future stage if a real gender source appears
+(e.g. Fragrantica/brand data), which is now recorded as the blocking dependency.
+
+## Stage 2 (delivered) — Estimated wear time + richer "why"
+
+The valuable, zero-risk half of Stage 2, grounded in ROBO data:
+
+- `notePhysics.js` gains `WEAR_ANCHORS` (top 2 h / heart 6 h / base 12 h — ROBO
+  `ds_b7_weartime_anchors.csv`, which ROBO itself marks confidence 0.3), plus
+  `longevityFactor(T)` (ROBO's reference longevity axis, 1.2 at 5 °C → 0.5 at
+  40 °C, log-linear) and `estimateWearHours(families, tempC)`.
+- `results.js`: the "why" line now ends with "· lasts about N h", computed at the
+  same temperature used for ranking.
+- `perfume.js`: an "Est. longevity" meta chip on the detail page, using the
+  user's current weather temperature when known (else 20 °C).
+- fa/en keys `results.wearAbout`, `results.wearHours`, `perfume.wear`.
+
+**Verified (mirror):** fresh scents 3–5 h, woody ~5–9 h, heavy bases 6.5–11 h;
+heat shortens and cold extends — matching real perfumery expectations.
+JSON valid, 211 i18n keys resolve in both locales, structure intact
+(the locale files were reformatted to 2-space JSON by the key-insertion script —
+content unchanged).
+
+---
+
 ## Next stages (not done — future)
-- Stage 2: expand catalog from ROBO's 40k; richer per-perfume "why".
+- Catalog expansion — blocked on a gender data source (see above).
 - Stage 3 (needs human-study data): cross-modal inference, trauma/hormone layer.

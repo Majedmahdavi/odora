@@ -76,3 +76,35 @@ export function tempEffect(family, tempC) {
 export function _familiesCovered() {
   return FAMILIES.every((f) => FAMILY_NOTE_CLASS[f]);
 }
+
+/* --- Stage 2: estimated wear time --------------------------------------- */
+
+/** Hours a note class typically lasts on skin — ROBO ds_b7_weartime_anchors.csv
+ *  (classic perfumery pyramid anchors; ROBO marks them confidence 0.3,
+ *  PENDING_EVAPORATION_DATA, so this is an estimate, not a measurement). */
+const WEAR_ANCHORS = { top: 2, heart: 6, base: 12 };
+
+/** How temperature stretches/shortens longevity — ROBO's reference longevity
+ *  axis (C_COLD 1.2 at 5°C → C_HOT 0.5 at 40°C), log-linear between them. */
+export function longevityFactor(tempC) {
+  const k = Math.log(0.5 / 1.2) / 35;
+  const T = Math.max(-5, Math.min(45, tempC));
+  return 1.2 * Math.exp(k * (T - 5));
+}
+
+/**
+ * Estimated hours a perfume lasts on skin: its family mix weighted by the
+ * note-class anchors, scaled by temperature. Fresh scents land around 3–5 h,
+ * heavy bases around 7–11 h, and heat shortens everything.
+ */
+export function estimateWearHours(families = {}, tempC = 20) {
+  let total = 0;
+  let weighted = 0;
+  for (const f of FAMILIES) {
+    const a = families[f] ?? 0;
+    total += a;
+    weighted += a * WEAR_ANCHORS[FAMILY_NOTE_CLASS[f] || "heart"];
+  }
+  if (total === 0) return null;
+  return (weighted / total) * longevityFactor(tempC);
+}
