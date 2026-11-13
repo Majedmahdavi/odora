@@ -105,9 +105,28 @@ function heroCard(item) {
         <h2 class="result-hero-name latin">${p.name}</h2>
         <p class="result-hero-brand latin">${p.brand}</p>
         <p class="match-text">${t("results.matchSuffix")}</p>
+        ${whyLine(item)}
         <a class="btn btn-ghost" href="#/perfume/${p.id}">${t("results.viewDetails")}</a>
       </div>
     </article>`;
+}
+
+/**
+ * Interpretability line (ROBO score decomposition): the two families that drive
+ * the match, plus how the weather (temperature operator) nudged them. Only shown
+ * when the active matcher provides contributions (the Scent-Matrix brain).
+ */
+function whyLine(item) {
+  const b = item.breakdown;
+  const c = b?.contributions;
+  if (!c || !c.length) return "";
+  const sep = getLang() === "fa" ? "، " : ", ";
+  const fams = c.slice(0, 2).map((x) => t(`families.${x.family}.name`)).join(sep);
+  // weather clause only when the perfume genuinely suits the season
+  let clause = "";
+  if (b.temp >= 0.55 && b.tempC <= 15) clause = ` ${t("results.tempCold")}`;
+  else if (b.temp >= 0.55 && b.tempC >= 25) clause = ` ${t("results.tempWarm")}`;
+  return `<p class="match-why">${t("results.whyLabel")} ${fams}${clause}</p>`;
 }
 
 function resultRow(item, rank) {

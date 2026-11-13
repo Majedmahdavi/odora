@@ -973,3 +973,6 @@ html[lang="en"] body { font-family: "Poppins", "Vazirmatn", system-ui, -apple-sy
   .dsc-orb span { animation: none !important; }
   .dsc-progress > span, .dsc-dna-fill { transition: none !important; }
 }
+
+/* ROBO Stage 1: interpretability line on the top result */
+.match-why { color: var(--text-muted); font-size: 0.9rem; margin-top: -0.1rem; max-width: 34ch; }

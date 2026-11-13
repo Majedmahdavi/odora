@@ -1,15 +1,16 @@
 import { buildProfile } from "./profile.js";
 import { localMatcher, cosine } from "./localMatcher.js";
+import { scentMatrixMatcher } from "./scentMatrixMatcher.js";
 import { aiMatcher } from "./aiMatcher.js";
 import { PERFUMES } from "../data/perfumes.js";
 
 /**
  * Matching facade (strategy pattern).
- * The rest of the app only ever calls recommend(); swapping to the AI engine
- * later is a one-liner: setMatcher("ai").
+ * The rest of the app only ever calls recommend(); swapping engines is a
+ * one-liner: setMatcher("scentmatrix") / setMatcher("local").
  */
 
-const MATCHERS = { local: localMatcher, ai: aiMatcher };
+const MATCHERS = { local: localMatcher, scentmatrix: scentMatrixMatcher, ai: aiMatcher };
 let activeId = "local";
 
 export function setMatcher(id) {

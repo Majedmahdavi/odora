@@ -9,6 +9,7 @@ import { loadLocale, t, getLang } from "./i18n/index.js";
 import { getState, setState } from "./state/store.js";
 import { register, setNotFound, startRouter, resolve } from "./router.js";
 import { applyTheme, getMode, toggleMode } from "./ui/theme.js";
+import { setMatcher } from "./matching/index.js";
 import { sunIcon, moonIcon, heartIcon, userIcon } from "./ui/icons.js";
 
 import { renderHome } from "./pages/home.js";
@@ -149,6 +150,7 @@ function page(renderFn, scope = "general") {
 
 async function boot() {
   const { lang } = getState();
+  setMatcher("scentmatrix"); // ROBO Stage 1: temperature-aware + interpretable brain
   applyTheme("default"); // general palette + current mode; router sets per-route
   await loadLocale(lang);
 
